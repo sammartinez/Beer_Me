@@ -43,7 +43,7 @@
             $GLOBALS['DB']->exec("DELETE FROM patrons WHERE id = {$this->getId()};");
         }
 
-        
+
 
         function save()
         {
@@ -72,6 +72,29 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM patrons;");
+        }
+
+        static function find($search_id)
+        {
+            $found_patron = NULL;
+            $patrons = Patron::getAll();
+            foreach($patrons as $patron) {
+                $patron_id = $patron->getId();
+                if($patron_id == $search_id) {
+                    $found_patron = $patron;
+                }
+            }
+            return $found_patron;
+        }
+
+        function updatePatron($new_name, $new_email)
+        {
+            $GLOBALS['DB']->exec("UPDATE patrons SET
+                 name = '{$new_name}',
+                 email = '{$new_email}'
+             WHERE id = {$this->getId()};");
+             $this->setName($new_name);
+             $this->setEmail($new_email);
         }
 
 

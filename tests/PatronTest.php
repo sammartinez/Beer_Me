@@ -97,6 +97,44 @@
             $this->assertEquals([$test_patron2], $result);
         }
 
+        function testFind()
+        {
+            //Arrange
+            $name = "Kyle Pratuch";
+            $email = "kyle.pratuch@gmail.com";
+            $test_patron = new Patron ($name, $email);
+            $test_patron->save();
+
+            $name2 = "Jason Bethel";
+            $email2 = "jlbethel@gmail.com";
+            $test_patron2 = new Patron ($name2, $email2);
+            $test_patron2->save();
+
+            //Act
+            $result = Patron::find($test_patron->getId());
+
+            //Assert
+            $this->assertEquals($test_patron, $result);
+        }
+
+        function testUpdatePatron()
+        {
+            $name = "Kyle Pratuch";
+            $email = "kyle.pratuch@gmail.com";
+            $test_patron = new Patron ($name, $email);
+            $test_patron->save();
+
+            $name2 = "Jason Bethel";
+            $email2 = "jlbethel@gmail.com";
+
+            //Act
+            $test_patron->updatePatron($name2, $email2);
+            $result = Patron::getAll();
+
+            //Assert
+            $this->assertEquals($test_patron, $result[0]);
+        }
+
 
 
 
