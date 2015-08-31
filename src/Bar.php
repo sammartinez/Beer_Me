@@ -68,9 +68,11 @@
         //Save method
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO bars (name, address, phone, website) VALUES (
-                '{$this->getName()}','{$this->getAddress()}',
-                '{$this->getPhone()}', '{$this->getWebsite()}');");
+            $GLOBALS['DB']->exec("INSERT INTO bars (name, phone, address, website) VALUES (
+                '{$this->getName()}',
+                '{$this->getPhone()}',
+                '{$this->getAddress()}',
+                '{$this->getWebsite()}');");
                 $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -81,12 +83,12 @@
         }
 
         //Update Method
-        function update($new_name, $new_address, $new_phone, $new_website)
+        function update($new_name, $new_phone, $new_address, $new_website)
         {
-            $GLOBALS['DB']->exec("UPDATE bars SET name = '{$new_name}', address = '{$new_address}', phone = '{$new_phone}', website = '{$new_website}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE bars SET name = '{$new_name}', phone = '{$new_phone}', address = '{$new_address}', website = '{$new_website}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
-            $this->setAddress($new_address);
             $this->setPhone($new_phone);
+            $this->setAddress($new_address);
             $this->setWebsite($new_website);
         }
 
@@ -97,11 +99,11 @@
             $bars = array();
             foreach ($returned_bars as $bar) {
                 $name = $bar['name'];
-                $address = $bar['address'];
                 $phone = $bar['phone'];
+                $address = $bar['address'];
                 $website = $bar['website'];
                 $id = $bar['id'];
-                $new_bar = new Bar($name, $address, $phone, $website, $id);
+                $new_bar = new Bar($name, $phone, $address, $website, $id);
                 array_push($bars, $new_bar);
             }
             return $bars;
