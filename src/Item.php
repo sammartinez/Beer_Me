@@ -7,7 +7,7 @@
         private $id;
 
         //Constructors
-        function __construct($$description, $cost, $id = null)
+        function __construct($description, $cost, $id = null)
         {
             $this->description = $description;
             $this->cost = $cost;
@@ -48,17 +48,19 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        //Update single description
-        function updateDescription()
+        //Update function
+        function update($new_description, $new_cost)
         {
-
+            $GLOBALS['DB']->exec("UPDATE items SET description = '{$new_description}', cost = {$new_cost} WHERE id = {$this->getId()};");
+            $this->setDescription($new_description);
+            $this->setCost($new_cost);
         }
 
-        //Update single cost
-        function updateCost()
+        function delete()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM items WHERE id = {$this->getId()};");
         }
+
 
         //Static functions
         static function getAll()
@@ -75,9 +77,17 @@
             return $all_items;
         }
 
-        static function find()
+        static function find($search_id)
         {
-
+            $found_item = null;
+            $items = Item::getAll();
+            foreach($items as $item) {
+                $item_id = $item->getId();
+                if ($item_id == $search_id) {
+                    $found_item = $item;
+                }
+            }
+            return $found_item;
         }
 
         static function deleteAll()
