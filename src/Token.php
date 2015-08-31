@@ -57,7 +57,7 @@
         //Static functions
         static function getAll()
         {
-            $returned_tokens = $GLOBALS['DB']->query("SELECT * FROM tokens ORDER BY name;");
+            $returned_tokens = $GLOBALS['DB']->query("SELECT * FROM tokens;");
             $tokens = array();
             foreach ($returned_tokens as $token) {
                 $patron_id = $token['patron_id'];
