@@ -6,6 +6,8 @@
     */
 
     require_once 'src/Bar.php';
+    require_once 'src/Token.php';
+    require_once 'src/Item.php';
 
     $server = 'mysql:host=localhost;dbname=beer_test';
     $username = 'root';
@@ -17,6 +19,8 @@
         protected function tearDown()
         {
             Bar::deleteAll();
+            Token::deleteAll();
+            Item::deleteAll();
         }
 
         function testGetName()
@@ -203,6 +207,8 @@
 
             $this->assertEquals([$test_bar2], $result);
         }
+
+        //Add tests for addItem, getAllItems, getAllTokens, deleteToken
 
     }
 
