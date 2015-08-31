@@ -1,0 +1,30 @@
+header {
+    width: 100%;
+    padding: 19px 0px;
+    text-align: right;
+    background: transparent;
+    z-index: 10;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 40px;
+}
+
+header .sticky-home-page {
+    color: blue;
+}
+
+.beer-me-logo {
+    width: 175px;
+    height: 175px;
+    border-radius: 100%;
+    align: left;
+}
+
+header .beer-me {
+    float: left;
+    width: 177px;
+    height: 175px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: left center;
+}
