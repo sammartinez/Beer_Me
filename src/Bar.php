@@ -95,12 +95,27 @@
         //Tokens Method
         function getAllTokens()
         {
-            //place code here
+            $results = $GLOBALS['DB']->query("SELECT tokens.* FROM
+            bars JOIN menus ON (bars.id = menus.bar_id)
+            JOIN tokens ON (menus.id = token.menu_id)
+            WHERE bars.id = {$this->getId()};
+            ");
+
+            $tokens = array();
+            foreach($results as $token) {
+                $patron_id = $token['patron_id'];
+                $menu_id = $token['menu_id'];
+                $sender_id = $token['sender_id'];
+                $id = $token=['id'];
+                $new_token = array($patron_id, $menu_id, $sender_id, $id);
+                array_push($tokens, $new_token);
+            }
+            return $tokens;
         }
 
         function deleteToken()
         {
-            //place code here
+            $GLOBALS->exec("DELETE * FROM tokens WHERE id = {$this->getId()};");
         }
 
 
