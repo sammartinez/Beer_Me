@@ -125,6 +125,7 @@
                 }
             }
             return $found_bar;
+            
         }
 
     }
