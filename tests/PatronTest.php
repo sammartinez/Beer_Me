@@ -6,6 +6,7 @@
 
 
     require_once "src/Patron.php";
+    require_once "src/Token.php";
     // require_once "src/Bar.php";
     // require_once "src/Item.php";
 
@@ -19,7 +20,7 @@
         protected function tearDown()
         {
             Patron::deleteAll();
-            $GLOBALS['DB']->exec("DELETE FROM tokens;");
+            Token::deleteAll();
         }
 
         function testSave()
@@ -157,29 +158,62 @@
             $this->assertEquals($test_patron, $result[0]);
         }
 
-        // function testAddToken()
-        // {
-        //     //Arrange
-        //
-        //     $name = "Kyle Pratuch";
-        //     $email = "kyle.pratuch@gmail.com";
-        //     $test_recipient = new Patron ($name, $email);
-        //     $test_recipient->save();
-        //
-        //     $name2 = "Jason Bethel";
-        //     $email2 = "jlbethel@gmail.com";
-        //     $test_sender = new Patron ($name2, $email2);
-        //     $test_sender->save();
-        //
-        //     $test_menu = 3;
-        //
-        //     //Act
-        //     $test_recipient->addToken($test_sender, $test_menu);
-        //     $result = $test_recipient->getTokens();
-        //
-        //     //Assert
-        //     $this->assertEquals([$test_recipient->getId(), $test_menu, $test_sender->getId()])
-        // }
+        function testAddToken()
+        {
+            //Arrange
+            $name = "Kyle Pratuch";
+            $email = "kyle.pratuch@gmail.com";
+            $test_recipient = new Patron ($name, $email);
+            $test_recipient->save();
+
+            $name2 = "Jason Bethel";
+            $email2 = "jlbethel@gmail.com";
+            $test_sender = new Patron ($name2, $email2);
+            $test_sender->save();
+
+            $patron_id = $test_recipient->getId();
+            $sender_id = $test_sender->getId();
+            $menu_id = 4;
+            $test_token = new Token($patron_id, $menu_id, $sender_id);
+
+            //Act
+            $test_recipient->addToken($test_sender, $test_menu);
+            $result = $test_recipient->getTokens();
+
+            //Assert
+            $this->assertEquals($test_token, $result[0]);
+        }
+
+        function testGetTokens()
+        {
+            //Arrange
+            $name = "Kyle Pratuch";
+            $email = "kyle.pratuch@gmail.com";
+            $test_recipient = new Patron ($name, $email);
+            $test_recipient->save();
+
+            $name2 = "Jason Bethel";
+            $email2 = "jlbethel@gmail.com";
+            $test_sender = new Patron ($name2, $email2);
+            $test_sender->save();
+
+            $patron_id = $test_recipient->getId();
+            $sender_id = $test_sender->getId();
+            $menu_id = 4;
+            $test_token = new Token($patron_id, $menu_id, $sender_id);
+            $test_recipient->addToken($test_sender, $test_menu);
+
+            $menu_id2 = 6;
+            $test_token2 = new Token($patron_id, $menu_id2, $sender_id);
+            $test_recipient->addToken($test_sender, $test_menu);
+
+            //Act
+
+            $result = $test_recipient->getTokens();
+
+            //Assert
+            $this->assertEquals([$test_token, $test_token2], $result);
+        }
 
 
 

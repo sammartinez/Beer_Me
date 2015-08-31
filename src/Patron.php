@@ -38,12 +38,11 @@
             return $this->id;
         }
 
+        //Delete a single patron:
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM patrons WHERE id = {$this->getId()};");
         }
-
-
 
         function save()
         {
@@ -74,6 +73,9 @@
             $GLOBALS['DB']->exec("DELETE FROM patrons;");
         }
 
+
+
+        //Find patron by id OR email:
         static function find($search_id)
         {
             $found_patron = NULL;
@@ -100,6 +102,9 @@
             return $found_patron;
         }
 
+
+
+        //Edit patron's info:
         function updatePatron($new_name, $new_email)
         {
             $GLOBALS['DB']->exec("UPDATE patrons SET
@@ -110,6 +115,8 @@
              $this->setEmail($new_email);
         }
 
+
+        //Waiting for Token class/tests:
         function addToken($sender, $menu)
         {
             $GLOBALS['DB']->exec("INSERT INTO tokens (patron_id, menu_id, sender_id) VALUES
@@ -134,7 +141,7 @@
                 $menu_id = $token['menu_id'];
                 $sender_id = $token['sender_id'];
                 $id = $token['id'];
-                $new_token = [$patron_id, $menu_id, $sender_id, $id];
+                $new_token = new Token($patron_id, $menu_id, $sender_id, $id);
                 array_push($tokens, $new_token);
             }
             return $tokens;
