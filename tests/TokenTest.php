@@ -96,7 +96,7 @@
 
             $result = Token::getAll();
 
-            $this->assertEquals([$test_token2, $test_token], $result);
+            $this->assertEquals([$test_token, $test_token2], $result);
         }
 
         function testDeleteAll()
@@ -117,25 +117,6 @@
             $result = Token::getAll();
 
             $this->assertEquals([], $result);
-        }
-
-        function testUpdate()
-        {
-            $patron_id = 1;
-            $menu_id = 2;
-            $sender_id = 3;
-            $test_token = new Token($patron_id, $menu_id, $sender_id);
-            $test_token->save();
-
-            $patron_id2 = 4;
-            $menu_id2 = 5;
-            $sender_id2 = 6;
-            $test_token2 = new Token($patron_id2, $menu_id2, $sender_id2);
-            $test_token2->save();
-
-            $test_token->update($patron_id2, $menu_id2, $sender_id2, $test_token->getId());
-
-            $this->assertEquals($test_token, $test_token2);
         }
 
         function testFind()
