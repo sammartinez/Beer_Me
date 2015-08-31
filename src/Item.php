@@ -56,6 +56,7 @@
             $this->setCost($new_cost);
         }
 
+        //Delete single item
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM items WHERE id = {$this->getId()};");
