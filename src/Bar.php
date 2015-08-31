@@ -92,6 +92,29 @@
             $this->setWebsite($new_website);
         }
 
+        //Tokens Method
+        function getAllTokens()
+        {
+            //place code here
+        }
+
+        function deleteToken()
+        {
+            //place code here
+        }
+
+
+        //Items Method
+        function addItem()
+        {
+            //place code here
+        }
+
+        function getAllItems()
+        {
+            //place code here
+        }
+
         //Static Methods
         static function getAll()
         {
