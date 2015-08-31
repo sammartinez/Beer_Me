@@ -115,7 +115,6 @@
              $this->setEmail($new_email);
         }
 
-
         //Waiting for Token class/tests:
         function addToken($sender, $menu)
         {
@@ -146,25 +145,6 @@
             }
             return $tokens;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 

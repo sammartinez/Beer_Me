@@ -1,0 +1,91 @@
+<?php
+
+
+    class Token
+    {
+        private $patron_id;
+        private $menu_id;
+        private $sender_id;
+        private $id;
+
+        //Constructors
+        function __construct($patron_id, $menu_id, $sender_id, $id = null)
+        {
+            $this->patron_id = $patron_id;
+            $this->menu_id = $menu_id;
+            $this->sender_id = $sender_id;
+            $this->id = $id;
+        }
+
+        //Getters
+        function getPatronId()
+        {
+            return $this->patron_id;
+        }
+
+        function getMenuId()
+        {
+            return $this->menu_id;
+        }
+
+        function getSenderId()
+        {
+            return $this->sender_id;
+        }
+
+        function getId()
+        {
+            return $this->id;
+        }
+
+        //Save Method
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO tokens (patron_id, menu_id, sender_id) VALUES (
+                '{$this->getPatronId()}',
+                '{$this->getMenuId()}',
+                '{$this->getSenderId()}');");
+                $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        //Delete single token
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM tokens WHERE id = {$this->getId()};");
+        }
+
+        //Static functions
+        static function getAll()
+        {
+            $returned_tokens = $GLOBALS['DB']->query("SELECT * FROM tokens;");
+            $tokens = array();
+            foreach ($returned_tokens as $token) {
+                $patron_id = $token['patron_id'];
+                $menu_id = $token['menu_id'];
+                $sender_id = $token['sender_id'];
+                $id = $token['id'];
+                $new_token = new Token($patron_id, $menu_id, $sender_id, $id);
+                array_push($tokens, $new_token);
+            }
+            return $tokens;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM tokens;");
+        }
+
+        static function find($search_id)
+        {
+            $found_token = null;
+            $all_tokens = Token::getAll();
+            foreach ($all_tokens as $token) {
+                if ($token->getId() == $search_id) {
+                    $found_token = $token;
+                }
+            }
+            return $found_token;
+        }
+    }
+
+ ?>
