@@ -115,16 +115,6 @@
              $this->setEmail($new_email);
         }
 
-        //Waiting for Token class/tests:
-        function addToken($sender, $menu)
-        {
-            $GLOBALS['DB']->exec("INSERT INTO tokens (patron_id, menu_id, sender_id) VALUES
-                ({$this->getId()},
-                {$menu->getId()},
-                {$sender->getId()});
-            ");
-        }
-
         function getTokens()
         {
             $returned_tokens = $GLOBALS['DB']->query
