@@ -38,12 +38,11 @@
             return $this->id;
         }
 
+        //Delete a single patron:
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM patrons WHERE id = {$this->getId()};");
         }
-
-
 
         function save()
         {
@@ -74,6 +73,9 @@
             $GLOBALS['DB']->exec("DELETE FROM patrons;");
         }
 
+
+
+        //Find patron by id OR email:
         static function find($search_id)
         {
             $found_patron = NULL;
@@ -87,6 +89,22 @@
             return $found_patron;
         }
 
+        static function search($search_email)
+        {
+            $found_patron = NULL;
+            $patrons = Patron::getAll();
+            foreach($patrons as $patron) {
+                $patron_email = $patron->getEmail();
+                if($patron_email == $search_email) {
+                    $found_patron = $patron;
+                }
+            }
+            return $found_patron;
+        }
+
+
+
+        //Edit patron's info:
         function updatePatron($new_name, $new_email)
         {
             $GLOBALS['DB']->exec("UPDATE patrons SET
@@ -97,6 +115,26 @@
              $this->setEmail($new_email);
         }
 
+        function getTokens()
+        {
+            $returned_tokens = $GLOBALS['DB']->query
+                ("SELECT tokens.* FROM patrons
+                    JOIN tokens ON (patrons.id = tokens.patron_id)
+                    JOIN menus ON (menus.id = tokens.menu_id)
+                WHERE patrons.id = {$this->getId()};
+                ");
+
+            $tokens = [];
+            foreach($returned_tokens as $token) {
+                $patron_id = $token['patron_id'];
+                $menu_id = $token['menu_id'];
+                $sender_id = $token['sender_id'];
+                $id = $token['id'];
+                $new_token = new Token($patron_id, $menu_id, $sender_id, $id);
+                array_push($tokens, $new_token);
+            }
+            return $tokens;
+        }
 
     }
 
