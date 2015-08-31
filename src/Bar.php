@@ -95,7 +95,7 @@
         //Static Methods
         static function getAll()
         {
-            $returned_bars = $GLOBALS['DB']->query("SELECT * FROM bars;");
+            $returned_bars = $GLOBALS['DB']->query("SELECT * FROM bars ORDER BY name;");
             $bars = array();
             foreach ($returned_bars as $bar) {
                 $name = $bar['name'];
