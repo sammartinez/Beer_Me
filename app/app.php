@@ -6,6 +6,7 @@
     require_once __DIR__."/../src/Patron.php";
 
     $app = New Silex\Application();
+    $app['debug'] = true;
 
     $server = 'mysql:host=localhost;dbname=beer';
     $username = 'root';
@@ -23,7 +24,15 @@
 
     //Get Calls
     $app->get("/", function() use($app) {
-        return $app['twig']->render("index.html.twig");
+        return $app['twig']->render("index.html.twig", array('sign_in' => false, 'sign_up' => false));
+    });
+
+    $app->get("/signup", function() use($app) {
+        return $app['twig']->render("index.html.twig", array('sign_in' => false, 'sign_up' => true));
+    });
+
+    $app->get("/signin", function() use($app) {
+        return $app['twig']->render("index.html.twig", array('sign_in' => true, 'sign_up' => false));
     });
 
     return $app;
