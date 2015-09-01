@@ -95,10 +95,11 @@
         //Tokens Method
         function getAllTokens()
         {
-            $results = $GLOBALS['DB']->query("SELECT tokens.* FROM
-            bars JOIN menus ON (bars.id = menus.bar_id)
-            JOIN tokens ON (menus.id = token.menu_id)
-            WHERE bars.id = {$this->getId()};
+            $results = $GLOBALS['DB']->query
+                ("SELECT tokens.* FROM
+                    bars JOIN menus ON (bars.id = menus.bar_id)
+                    JOIN tokens ON (tokens.menu_id = menus.id)
+                    WHERE bars.id = {$this->getId()};
             ");
 
             $tokens = array();
@@ -106,16 +107,11 @@
                 $patron_id = $token['patron_id'];
                 $menu_id = $token['menu_id'];
                 $sender_id = $token['sender_id'];
-                $id = $token=['id'];
+                $id = $token['id'];
                 $new_token = new Token($patron_id, $menu_id, $sender_id, $id);
                 array_push($tokens, $new_token);
             }
             return $tokens;
-        }
-
-        function deleteToken()
-        {
-            $GLOBALS->exec("DELETE * FROM tokens WHERE id = {$this->getId()};");
         }
 
 
@@ -139,7 +135,7 @@
             foreach($results as $item) {
                 $description = $item['description'];
                 $cost = $item['cost'];
-                $id = $item=['id'];
+                $id = $item['id'];
                 $new_item = new Item($description, $cost, $id);
                 array_push($items, $new_item);
             }
@@ -166,7 +162,7 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM bars;");
-            //Delete from all join tables that are assoicated with the bar_id..
+            $GLOBALS['DB']->exec("DELETE FROM menus;");
         }
 
         static function find($search_id)
@@ -179,7 +175,7 @@
                 }
             }
             return $found_bar;
-            
+
         }
 
     }

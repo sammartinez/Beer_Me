@@ -7,8 +7,8 @@
 
     require_once "src/Patron.php";
     require_once "src/Token.php";
-    // require_once "src/Bar.php";
-    // require_once "src/Item.php";
+    require_once "src/Bar.php";
+    require_once "src/Item.php";
 
     $server = 'mysql:host=localhost;dbname=beer_test';
     $username = 'root';
@@ -17,11 +17,13 @@
 
     class PatronTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Patron::deleteAll();
-        //     Token::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Patron::deleteAll();
+            Token::deleteAll();
+            Bar::deleteAll();
+            Item::deleteAll();
+        }
 
         function testSave()
         {
@@ -158,7 +160,6 @@
             $this->assertEquals($test_patron, $result[0]);
         }
 
-
         function testGetTokens()
         {
             //Arrange
@@ -172,25 +173,92 @@
             $test_sender = new Patron ($name2, $email2);
             $test_sender->save();
 
+            $bar_name = "Side Street";
+            $phone = "555-555-5555";
+            $address = "123 ABC. Street";
+            $website = "http://www.sidestreetpdx.com";
+            $test_bar = new Bar($bar_name, $phone, $address, $website);
+            $test_bar->save();
+
+            $description = "Pliny the Elder";
+            $cost = 5.00;
+            $id = null;
+            $test_item = new Item($description, $cost, $id);
+            $test_item->save();
+
+            $test_bar->addItem($test_item);
+
             $patron_id = $test_recipient->getId();
             $sender_id = $test_sender->getId();
-            $menu_id = 4;
+            $menu_id = 1;
             $test_token = new Token($patron_id, $menu_id, $sender_id);
             $test_token->save();
-            var_dump($test_token);
 
-
-
-            $menu_id2 = 6;
+            $menu_id2 = 2;
             $test_token2 = new Token($patron_id, $menu_id2, $sender_id);
             $test_token2->save();
 
             //Act
 
             $result = $test_recipient->getTokens();
-            var_dump($result);
+
             //Assert
             $this->assertEquals([$test_token, $test_token2], $result);
+        }
+
+        function testAddPreferredBar()
+        {
+            //Arrange
+            $name = "Kyle Pratuch";
+            $email = "kyle.pratuch@gmail.com";
+            $test_patron = new Patron ($name, $email);
+            $test_patron->save();
+
+            $bar_name = "Side Street";
+            $phone = "555-555-5555";
+            $address = "123 ABC. Street";
+            $website = "http://www.sidestreetpdx.com";
+            $test_bar = new Bar($bar_name, $phone, $address, $website);
+            $test_bar->save();
+
+            //Act
+            $test_patron->addPreferredBar($test_bar);
+            $result = $test_patron->getPreferredBars();
+
+            //Assert
+            $this->assertEquals($test_bar, $result[0]);
+        }
+
+        function testGetPreferredBars()
+        {
+            //Arrange
+            $name = "Kyle Pratuch";
+            $email = "kyle.pratuch@gmail.com";
+            $test_patron = new Patron ($name, $email);
+            $test_patron->save();
+
+            $bar_name = "Side Street";
+            $phone = "555-555-5555";
+            $address = "123 ABC. Street";
+            $website = "http://www.sidestreetpdx.com";
+            $test_bar = new Bar($bar_name, $phone, $address, $website);
+            $test_bar->save();
+
+            $bar_name2 = "ABC Pub";
+            $phone2 = "444-444-4444";
+            $address2 = "321 CBA Street";
+            $website2 = "http://www.sesamestreet.com";
+            $test_bar2 = new Bar($bar_name2, $phone2, $address2, $website2);
+            $test_bar2->save();
+
+            $test_patron->addPreferredBar($test_bar);
+            $test_patron->addPreferredBar($test_bar2);
+
+            //Act
+            $result = $test_patron->getPreferredBars();
+
+            //Assert
+            $this->assertEquals([$test_bar, $test_bar2], $result);
         }
 
 

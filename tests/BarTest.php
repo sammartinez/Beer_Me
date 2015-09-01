@@ -8,6 +8,7 @@
     require_once 'src/Bar.php';
     require_once 'src/Token.php';
     require_once 'src/Item.php';
+    require_once 'src/Patron.php';
 
     $server = 'mysql:host=localhost;dbname=beer_test';
     $username = 'root';
@@ -21,6 +22,7 @@
             Bar::deleteAll();
             Token::deleteAll();
             Item::deleteAll();
+            Patron::deleteAll();
         }
 
         function testGetName()
@@ -208,7 +210,87 @@
             $this->assertEquals([$test_bar2], $result);
         }
 
-        //Add tests for addItem, getAllItems, getAllTokens, deleteToken
+        function testAddItem()
+        {
+
+            $test_item = new Item("tacos", 2.25);
+            $test_item->save();
+
+            $name = "Side Street";
+            $phone = "555-555-5555";
+            $address = "123 ABC. Street";
+            $website = "http://www.sidestreetpdx.com";
+            $test_bar = new Bar($name, $phone, $address, $website);
+            $test_bar->save();
+
+            $test_bar->addItem($test_item);
+
+            $result = $test_bar->getAllItems();
+
+            $this->assertEquals($test_item, $result[0]);
+
+        }
+
+        function testGetAllItems()
+        {
+            $test_item = new Item("tacos", 2.25);
+            $test_item->save();
+
+            $test_item2 = new Item("pork", 4.25);
+            $test_item2->save();
+
+            $name = "Side Street";
+            $phone = "555-555-5555";
+            $address = "123 ABC. Street";
+            $website = "http://www.sidestreetpdx.com";
+            $test_bar = new Bar($name, $phone, $address, $website);
+            $test_bar->save();
+
+            $test_bar->addItem($test_item);
+            $test_bar->addItem($test_item2);
+
+            $result = $test_bar->getAllItems();
+
+
+            $this->assertEquals([$test_item, $test_item2], $result);
+        }
+
+
+        function testGetAllTokens()
+        {
+
+          $name = "Side Street";
+          $phone = "555-555-5555";
+          $address = "123 ABC. Street";
+          $website = "http://www.sidestreetpdx.com";
+          $test_bar = new Bar($name, $phone, $address, $website);
+          $test_bar->save();
+
+          $test_item = new Item("tacos", 2.25);
+          $test_item->save();
+
+          $test_bar->addItem($test_item);
+
+          $returned_ids = $GLOBALS['DB']->query("SELECT id FROM menus WHERE bar_id = {$test_bar->getId()};");
+          $ids = array();
+          foreach($returned_ids as $returned_id) {
+              $id = $returned_id['id'];
+              array_push($ids, $id);
+          }
+
+          $name = "Kyle Pratuch";
+          $email = "kyle.pratuch@gmail.com";
+          $test_patron = new Patron ($name, $email);
+          $test_patron->save();
+
+          $test_token = new Token($test_patron->getId(), $ids[0], 3);
+          $test_token->save();
+        //   var_dump($test_token);
+
+          $result = $test_bar->getAllTokens();
+
+          $this->assertEquals($test_token, $result[0]);
+        }
 
     }
 
