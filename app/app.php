@@ -35,6 +35,10 @@
         return $app['twig']->render("index.html.twig", array('sign_in' => true, 'sign_up' => false));
     });
 
+    $app->get("/about", function() use($app) {
+        return $app['twig']->render("about.html.twig");
+    });
+
     return $app;
 
 ?>

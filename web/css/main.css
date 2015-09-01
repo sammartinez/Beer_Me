@@ -7,6 +7,7 @@
 body {
     overflow-x: hidden;
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #000;
 }
 
 .text-muted {
@@ -266,9 +267,11 @@ header {
     text-align: center;
     color: #fff;
     background-attachment: scroll;
-    background-image: url(/img/bar_photo.jpg);
+    background-image:
+        linear-gradient(0deg, #000000, transparent 20%),
+        url(/img/bar_photo.jpg);
     background-position: center center;
-    background-repeat: none;
+    background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -329,6 +332,7 @@ section h2.section-heading {
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 40px;
+    color: #fff;
 }
 
 section h3.section-subheading {
@@ -346,7 +350,7 @@ section h3.section-subheading {
     }
 }
 
-.service-heading {
+.section-heading {
     margin: 15px 0;
     text-transform: none;
 }
@@ -487,7 +491,7 @@ section h3.section-subheading {
     z-index: 100;
     position: absolute;
     left: 0;
-    width: 80px;
+    width: 60px;
     height: 80px;
     margin-left: 0;
     border: 7px solid #f1f1f1;
@@ -560,8 +564,8 @@ section h3.section-subheading {
 
     .timeline>li .timeline-image {
         left: 50%;
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         margin-left: -50px;
     }
 
@@ -588,8 +592,8 @@ section h3.section-subheading {
     }
 
     .timeline>li .timeline-image {
-        width: 150px;
-        height: 150px;
+        width: 10   0px;
+        height: 100px;
         margin-left: -75px;
     }
 
@@ -614,8 +618,8 @@ section h3.section-subheading {
     }
 
     .timeline>li .timeline-image {
-        width: 170px;
-        height: 170px;
+        width: 200px;
+        height: 200px;
         margin-left: -85px;
     }
 

@@ -2543,8 +2543,8 @@ output {
   color: #555;
 }
 .form-control {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: 50%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
@@ -2750,6 +2750,7 @@ select[multiple].input-lg {
 }
 .form-group-lg .form-control {
   height: 46px;
+  width: 50%;
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.3333333;
