@@ -208,7 +208,42 @@
             $this->assertEquals([$test_bar2], $result);
         }
 
-        //Add tests for addItem, getAllItems, getAllTokens, deleteToken
+        function testAddItem()
+        {
+
+            $test_item = new Item("tacos", 2.25);
+            $test_item->save();
+
+            $name = "Side Street";
+            $phone = "555-555-5555";
+            $address = "123 ABC. Street";
+            $website = "http://www.sidestreetpdx.com";
+            $test_bar = new Bar($name, $phone, $address, $website);
+            $test_bar->save();
+
+            $test_bar->addItem($test_item);
+
+            $result = $test_bar->getAllItems();
+
+            $this->assertEquals($test_item, $result[0]);
+
+        }
+
+
+
+
+        // function testGetAllTokens()
+        // {
+        //
+        //   $name = "Side Street";
+        //   $phone = "555-555-5555";
+        //   $address = "123 ABC. Street";
+        //   $website = "http://www.sidestreetpdx.com";
+        //   $test_bar = new Bar($name, $phone, $address, $website);
+        //   $test_bar->save();
+        //
+        //   $test_token = new Token(2, )
+        // }
 
     }
 
