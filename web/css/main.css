@@ -656,6 +656,10 @@ aside.clients img {
     margin: 50px auto;
 }
 
+section#sign-in .section-heading {
+    color: #fff;
+}
+
 section#contact {
     background-color: #222;
     background-image: url(../img/map-image.png);
