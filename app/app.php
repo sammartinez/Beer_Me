@@ -9,7 +9,7 @@
     $app = New Silex\Application();
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=beer';
+    $server = 'mysql:host=localhost:8889;dbname=beer';
     $username = 'root';
     $password = 'root';
 
@@ -39,6 +39,10 @@
 
     $app->get('/email', function() use($app) {
         return $app['twig']->render("email.html.twig", array('message' => null));
+    });
+
+    $app->get("/about", function() use($app) {
+        return $app['twig']->render("about.html.twig");
     });
 
     /* Testing mail shit */
