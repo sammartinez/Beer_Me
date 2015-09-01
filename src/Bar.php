@@ -113,11 +113,6 @@
             return $tokens;
         }
 
-        function deleteToken()
-        {
-            $GLOBALS->exec("DELETE * FROM tokens WHERE id = {$this->getId()};");
-        }
-
 
         //Items Method
         function addItem($item)
@@ -139,7 +134,7 @@
             foreach($results as $item) {
                 $description = $item['description'];
                 $cost = $item['cost'];
-                $id = $item=['id'];
+                $id = $item['id'];
                 $new_item = new Item($description, $cost, $id);
                 array_push($items, $new_item);
             }
@@ -179,7 +174,7 @@
                 }
             }
             return $found_bar;
-            
+
         }
 
     }
