@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Email Test</title>
+    </head>
+    <body>
+        <form action="email_send" method="post">
+            <label for="email">Enter an email address:</label>
+            <input id="email" name="email" type="text">
+            <label for="name">Enter a name:</label>
+            <input id="name" name="name" type="text">
+            <button type="submit">Send</button>
+        </form>
+        <p>{{ message }}</p>
+    </body>
+</html>

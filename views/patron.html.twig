@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>{{ user.getName }}</title>
+    </head>
+    <body>
+    <a href='/show_email_search'><h1>Buy a beer:</h1></a>
+
+        {% if send_token == true %}
+        <h2>Find a friend:</h2>
+            <form action='/find_friend'>
+                <label for='search_email'>Your friend's email:</label>
+                <input id='search_email' name='search_email' type='text' placeholder='buddy@email.com' required>
+                <button type='submit'>Search</button>
+            </form>
+        {% endif %}
+
+        <a href='/show_user_tokens/{id}'><h1>My tokens:</h1></a>
+        {% if my_tokens == true %}
+            {% if user_tokens is not empty %}
+            <ul>
+                {% for token in user_tokens %}
+                    {# <a href='/token'><p>Placeholder</p></a> This will route to a page with a confirmation code #}
+                    {# add these lines to Silex route
+                        {% set returned_menu = token.getMenuItem %}
+                        {% set bar = Bar::find($returned_menu[0]) %}
+                        {% set item = Item::find($returned_menu[1]) %}
+                    #}
+                    <li>Drink: {{ item.getDescription }}<br>
+                        Bar: {{ bar.getName }}<br>
+                        Sent by: {{ sender.getName }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>You don't have any tokens yet! Apparently, you don't have any cool friends either.</p>
+        {% endif %}
+
+        <a href='/show_user_edit/{id}'><h1>Edit Profile</h1></a>
+        {% if edit_user == true %}
+            <form action='/edit_user/{id}' method='post'>
+                <input name='_method' type='hidden' value='patch'>
+                <label for='name'>Name</label>
+                <input id='name' name='name' type='text' value='user.getName' required>
+                <label for='email'>Email</label>
+                <input id='email' name='email' type='text' value='user.getEmail' required>
+                <button type='submit'>Update</button>
+            </form>
+        {% endif %}
+
+        <a href='/show_preferred_bars/{id}'><h1>Your favorite bars</h1></a>
+        {% if preferred_bars = true %}
+            <form action='/add_preferred_bar' method='post'>
+                <label for='add_bar'>Participating bars</label>
+                <select id='add_bar' name='add_bar'>
+                    {% for bar in all_bars %} {# Remove already added bars from this list #}
+                        <option value='{{bar.getId}}'>{{ bar.getName }}</option>
+                    {% endfor %}
+                </select>
+                <button type='submit'>Add bar</button>
+            </form>
+
+            <form action='/delete_preferred_bar'>
+                <label for="delete_bar">Delete a bar</label>
+                <select id='delete_bar' name='delete_bar'>
+                    {% for bar in user.getPreferredBars %}
+                        <option value='{{bar.getId}}'>{{ bar.getName }}</option>
+                    {% endfor %}
+                </select>
+                <button type='submit'>Delete preferred bar</label>
+            </form>
+        {% endif %}
+    </body>
+</html>
