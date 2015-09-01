@@ -160,7 +160,6 @@
             $this->assertEquals($test_patron, $result[0]);
         }
 
-        
         function testGetTokens()
         {
             //Arrange
@@ -205,6 +204,61 @@
 
             //Assert
             $this->assertEquals([$test_token, $test_token2], $result);
+        }
+
+        function testAddPreferredBar()
+        {
+            //Arrange
+            $name = "Kyle Pratuch";
+            $email = "kyle.pratuch@gmail.com";
+            $test_patron = new Patron ($name, $email);
+            $test_patron->save();
+
+            $bar_name = "Side Street";
+            $phone = "555-555-5555";
+            $address = "123 ABC. Street";
+            $website = "http://www.sidestreetpdx.com";
+            $test_bar = new Bar($bar_name, $phone, $address, $website);
+            $test_bar->save();
+
+            //Act
+            $test_patron->addPreferredBar($test_bar);
+            $result = $test_patron->getPreferredBars();
+
+            //Assert
+            $this->assertEquals($test_bar, $result[0]);
+        }
+
+        function testGetPreferredBars()
+        {
+            //Arrange
+            $name = "Kyle Pratuch";
+            $email = "kyle.pratuch@gmail.com";
+            $test_patron = new Patron ($name, $email);
+            $test_patron->save();
+
+            $bar_name = "Side Street";
+            $phone = "555-555-5555";
+            $address = "123 ABC. Street";
+            $website = "http://www.sidestreetpdx.com";
+            $test_bar = new Bar($bar_name, $phone, $address, $website);
+            $test_bar->save();
+
+            $bar_name2 = "ABC Pub";
+            $phone2 = "444-444-4444";
+            $address2 = "321 CBA Street";
+            $website2 = "http://www.sesamestreet.com";
+            $test_bar2 = new Bar($bar_name2, $phone2, $address2, $website2);
+            $test_bar2->save();
+
+            $test_patron->addPreferredBar($test_bar);
+            $test_patron->addPreferredBar($test_bar2);
+
+            //Act
+            $result = $test_patron->getPreferredBars();
+
+            //Assert
+            $this->assertEquals([$test_bar, $test_bar2], $result);
         }
 
 
