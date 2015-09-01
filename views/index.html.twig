@@ -1,47 +1,72 @@
 <html>
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/agency.css">
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
         <title>Beer Me</title>
     </head>
     <body>
-        <header class="sticky home-page">
-            <div class="row global-margin">
-                <div class="container">
-                    <div class="col-md-12">
-                        <a href="/" class="beer-me"><h2>Beer Me</h2></a>
-                        <button type="submit" class="btn btn-success"><a href="/signup">Signup</a></button>
-                        <button type="submit" class="btn btn-success"><a href="/signin">Sign-in</a></button>
-                    </div>
+        <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+                <div class="navbar-header page-scroll">
+                    <a href="/"><img src="/img/logo.png" class="logo"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden active">
+                            <a href="#page-top"></a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="/signup">Sign Up</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="/signin">Sign In</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#about">About</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#team">Team</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#contact">Contact</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </nav>
+        <header>
+            <div class="container">
+                <div class="intro-text">
+                <div class="intro-lead-in">Send Your Friend a Beer <br> Even When You're Not Near</div>
+                <div class="intro-heading">Beer Me!</div>
+                <a href="/signin" class="page-scroll btn btn-xl">Learn More</a>
+                {% if sign_in == true %}
+                    <h1>Log in to your account.</h1>
+                    <form action="/login" method="get">
+                        <div class="form-group">
+                            <label for="username">Enter your username:</label>
+                            <input class="form-control" placeholder="Username" id="username" name="username" type="text" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Sign in</button>
+                    </form>
+
+                {% elseif sign_up == true %}
+                    <h1>Create a new account.</h1>
+                    <form action="/signup" method="post">
+                        <div class="form-group">
+                            <label for="username">Enter your username:</label>
+                            <input class="form-control" placeholder="Username" id="username" name="username" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Enter your email:</label>
+                            <input class="form-control" placeholder="Email Address" id="email" name="email" type="text" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Sign up</button>
+                    </form>
+                {% endif %}
+            </div>
+            </div>
         </header>
-
-            {% if sign_in == true %}
-                <h1>Log in to your account.</h1>
-                <form action="/login" method="get">
-                    <div class="form-group">
-                        <label for="username">Enter your username:</label>
-                        <input class="form-control" placeholder="Username" id="username" name="username" type="text" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Sign in</button>
-                </form>
-
-            {% elseif sign_up == true %}
-                <h1>Create a new account.</h1>
-                <form action="/signup" method="post">
-                    <div class="form-group">
-                        <label for="username">Enter your username:</label>
-                        <input class="form-control" placeholder="Username" id="username" name="username" type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Enter your email:</label>
-                        <input class="form-control" placeholder="Email Address" id="email" name="email" type="text" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Sign up</button>
-                </form>
-            {% endif %}
-        </div>
-
     </body>
 </html>
