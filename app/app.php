@@ -11,7 +11,7 @@
     $app = New Silex\Application();
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=beer';
+    $server = 'mysql:host=localhost:8889;dbname=beer';
     $username = 'root';
     $password = 'root';
 
@@ -150,6 +150,7 @@
             ));
     });
 
+<<<<<<< HEAD
 
     $app->get("/show_preferred_bars/{id}", function($id) use($app) {
         $user = Patron::find($id);
@@ -163,6 +164,42 @@
             'token_form' => false,
             'edit_user' => false
             ));
+=======
+    $app->get("/about", function() use($app) {
+        return $app['twig']->render("about.html.twig");
+    });
+
+    /* Testing mail shit */
+    $app->post("/email_send", function() use($app) {
+        $mail = new PHPMailer();
+        // $mail->SMTPDebug = 3;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'beerme.token@gmail.com';
+        $mail->Password = 'b33rm3123';
+        $mail->STMPSecure = 'tls';
+        $mail->Port = 587;
+
+        $mail->From = 'beerme.token@gmail.com';
+        $mail->FromName = 'Beer Me!';
+        $mail->addAddress($_POST['email'], $_POST['name']);
+        $mail->addReplyTo('beerme.token@gmail.com', 'Beer Me!');
+        $mail->isHTML(true);
+
+        $mail->Subject = 'Somebody sent you a token!';
+        $mail->Body = 'HEY YOU GUYS!  LOOK WAT I DONE DID!!!!!!.';
+        $mail->AltBody = 'Received token.';
+
+        $email = $_POST['email'];
+        $name = $_POST['name'];
+        if(!$mail->send()) {
+            $message = 'Message could not be sent. <p>';
+        } else {
+            $message = 'Message has been sent.';
+        }
+        return $app['twig']->render("email.html.twig", array('message' => $message));
+>>>>>>> master
     });
 
     $app->post("/add_preferred_bar/{id}", function($id) use($app) {

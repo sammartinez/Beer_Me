@@ -2,6 +2,7 @@
     <head>
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="css/main.css" rel="stylesheet">
@@ -15,7 +16,6 @@
         <title>Beer Me</title>
     </head>
     <body id="page-top" class="index">
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand page-scroll" href="/">Beer Me<img src="/img/logo.png" class="logo"></a>
+                    <a class="navbar-brand page-scroll" href="/">Beer Me</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -43,49 +43,81 @@
                             <a class="page-scroll" href="/signin">Sign In</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#about">About</a>
+                            <a class="page-scroll" href="/about">About</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#team">Team</a>
+                            <a class="page-scroll" href="/team">Team</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#contact">Contact</a>
+                            <a class="page-scroll" href="/contact">Contact</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
+        <!-- Header -->
         <header>
             <div class="container">
                 <div class="intro-text">
-                <div class="intro-lead-in">It's About Time You Buy Your Friend</div>
-                <div class="intro-heading">a Damn Beer.</div>
-                <a href="/signin" class="page-scroll btn btn-xl">Learn More</a>
+                    <div class="intro-lead-in">It's About Time You Buy Your Friend</div>
+                    <div class="intro-heading">a Damn Beer.</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sign In/Sign Up -->
+        <section id="sign-in">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
                 {% if sign_in == true %}
-                    <h1>Log in to your account.</h1>
+                    <h2 class="section-heading">Log in to your account.</h2>
                     <form action="/login" method="get">
-                        <div class="form-group">
+                        <div class="col-xs-3">
                             <label for="username">Enter your username:</label>
                             <input class="form-control" placeholder="Username" id="username" name="username" type="text" required>
                         </div>
-                        <button type="submit" class="btn btn-success">Sign in</button>
+                        <a href="/signin" class="page-scroll btn btn-xl">Sign In</a>
                     </form>
+                    </div>
+                </div>
+
                 {% elseif sign_up == true %}
-                    <h1>Create a new account.</h1>
+                    <h2 class="section-heading">Create a new account.</h2>
                     <form action="/signup" method="post">
-                        <div class="form-group">
+                        <div class="col-xs-3">
                             <label for="username">Enter your username:</label>
-                            <input class="form-control" placeholder="Username" id="username" name="username" type="text" required>
+                            <input class="form-control input-lg" placeholder="Username" id="username" name="username" type="text" required>
                         </div>
-                        <div class="form-group">
+                        <div class="col-xs-3">
                             <label for="email">Enter your email:</label>
-                            <input class="form-control" placeholder="Email Address" id="email" name="email" type="text" required>
+                            <input class="form-control input-lg" placeholder="Email Address" id="email" name="email" type="text" required>
                         </div>
-                        <button type="submit" class="btn btn-success">Sign up</button>
+                        <a href="/signin" class="page-scroll btn btn-xl">Sign In</a>
                     </form>
                 {% endif %}
             </div>
-            </div>
+        </section>
+
+
+            <!-- jQuery -->
+            <script src="js/jquery.js"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="js/bootstrap.min.js"></script>
+
+            <!-- Plugin JavaScript -->
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+            <script src="js/classie.js"></script>
+            <script src="js/cbpAnimatedHeader.js"></script>
+
+            <!-- Contact Form JavaScript -->
+            <script src="js/jqBootstrapValidation.js"></script>
+            <script src="js/contact_me.js"></script>
+
+            <!-- Custom Theme JavaScript -->
+            <script src="js/agency.js"></script>
         </header>
     </body>
 </html>

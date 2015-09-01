@@ -86,6 +86,20 @@
             }
             return $found_token;
         }
+
+        function getMenuItem()
+        {
+            $returned_items = $GLOBALS['DB']->query("SELECT * FROM menus WHERE id = {$this->getMenuId()};");
+
+            $menu_items = array();
+            foreach($returned_items as $item) {
+                $bar_id = $item['bar_id'];
+                array_push($menu_items, $bar_id);
+                $item_id = $item['item_id'];
+                // $id = ['id'];
+                array_push($menu_items, $item_id);
+            }
+        } return $menu_items;
     }
 
  ?>
