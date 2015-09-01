@@ -117,23 +117,34 @@
 
         function getTokens()
         {
-            $returned_tokens = $GLOBALS['DB']->query
-                ("SELECT tokens.* FROM patrons
-                    JOIN tokens ON (patrons.id = tokens.patron_id)
-                    JOIN menus ON (menus.id = tokens.menu_id)
-                WHERE patrons.id = {$this->getId()};
-                ");
+            $returned_tokens = $GLOBALS['DB']->query("SELECT * FROM tokens WHERE patron_id = {$this->getId()};");
 
-            $tokens = [];
+            $tokens = array();
             foreach($returned_tokens as $token) {
-                $patron_id = $token['patron_id'];
-                $menu_id = $token['menu_id'];
-                $sender_id = $token['sender_id'];
-                $id = $token['id'];
-                $new_token = new Token($patron_id, $menu_id, $sender_id, $id);
+                $token_id = $token['id'];
+                $new_token = Token::find($token_id);
                 array_push($tokens, $new_token);
             }
             return $tokens;
+        }
+
+        function addPreferredBar($bar)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO preferbars (patron_id, bar_id)
+                        VALUES ({$this->getId()}, {$bar->getId()});");
+        }
+
+        function getPreferredBars()
+        {
+            $returned_bars = $GLOBALS['DB']->query("SELECT * FROM preferbars WHERE patron_id = {$this->getId()};");
+
+            $preferred_bars = array();
+            foreach($returned_bars as $bar) {
+                $bar_id = $bar['bar_id'];
+                $new_bar = Bar::find($bar_id);
+                array_push($preferred_bars, $new_bar);
+            }
+            return $preferred_bars;
         }
 
     }
