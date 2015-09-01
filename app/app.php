@@ -1,6 +1,7 @@
 <?php
 
     require_once __DIR__."/../vendor/autoload.php";
+    require_once __DIR__.'/../vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
     require_once __DIR__."/../src/Bar.php";
     require_once __DIR__."/../src/Item.php";
     require_once __DIR__."/../src/Patron.php";
@@ -13,6 +14,7 @@
     $password = 'root';
 
     $DB = new PDO($server, $username, $password);
+
 
     //Twig Path
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -33,6 +35,42 @@
 
     $app->get("/signin", function() use($app) {
         return $app['twig']->render("index.html.twig", array('sign_in' => true, 'sign_up' => false));
+    });
+
+    $app->get('/email', function() use($app) {
+        return $app['twig']->render("email.html.twig", array('message' => null));
+    });
+
+    /* Testing mail shit */
+    $app->post("/email_send", function() use($app) {
+        $mail = new PHPMailer();
+        // $mail->SMTPDebug = 3;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'beerme.token@gmail.com';
+        $mail->Password = 'b33rm3123';
+        $mail->STMPSecure = 'tls';
+        $mail->Port = 587;
+
+        $mail->From = 'beerme.token@gmail.com';
+        $mail->FromName = 'Beer Me!';
+        $mail->addAddress($_POST['email'], $_POST['name']);
+        $mail->addReplyTo('beerme.token@gmail.com', 'Beer Me!');
+        $mail->isHTML(true);
+
+        $mail->Subject = 'Somebody sent you a token!';
+        $mail->Body = 'HEY YOU GUYS!  LOOK WAT I DONE DID!!!!!!.';
+        $mail->AltBody = 'Received token.';
+
+        $email = $_POST['email'];
+        $name = $_POST['name'];
+        if(!$mail->send()) {
+            $message = 'Message could not be sent. <p>';
+        } else {
+            $message = 'Message has been sent.';
+        }
+        return $app['twig']->render("email.html.twig", array('message' => $message));
     });
 
     return $app;
