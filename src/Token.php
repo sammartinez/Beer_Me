@@ -104,7 +104,13 @@
 
         function getPatronName()
         {
-            $returned_patrons = $GLOBALS['DB']->query("SELECT patrons.name FROM patrons WHERE id = {$this->getPatronId()};");
+            $returned_patrons = $GLOBALS['DB']->query("SELECT name FROM patrons WHERE id = {$this->getPatronId()};");
+
+            $names = array();
+            foreach($returned_patrons as $name){
+                $patron_name = $name['name'];
+            }
+            return $patron_name;
         }
     }
 
