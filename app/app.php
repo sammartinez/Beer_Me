@@ -44,6 +44,7 @@
         $username = $_GET['username'];
         $user = Patron::search($username);
         $all_bars = Bar::getAll();
+
         return $app['twig']->render("patron.html.twig", array(
             'user' => $user,
             'user_tokens' => $user->getTokens(),
