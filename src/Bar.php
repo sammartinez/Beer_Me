@@ -205,7 +205,19 @@
                 }
             }
             return $found_bar;
+        }
 
+        static function search($search_name)
+        {
+            $found_bar = NULL;
+            $bars = Bar::getAll();
+            foreach($bars as $bar) {
+                $name = $bar->getName();
+                if($name == $search_name) {
+                    $found_bar = $bar;
+                }
+            }
+            return $found_bar;
         }
 
     }
