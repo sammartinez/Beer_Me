@@ -65,11 +65,18 @@
                 'send_token' => false,
                 'token_form' => false,
                 'edit_user' => false
-            ));
-        }
-            return $app['twig']->render("bar.html.twig", array('bar' => $bar));
 
-    });
+            ));} else {
+            return $app['twig']->render("bar.html.twig", array(
+                'bar' => $bar,
+                'tokens' => $bar->getAllTokens(),
+                'items' => $bar->getAllItems(),
+                'get_tokens' => false,
+                'show_menu' => false,
+                'edit_bar' => false
+                ));
+        }
+
 
     $app->get("/show_email_search/{id}", function($id) use($app) {
         $user = Patron::find($id);
@@ -145,6 +152,67 @@
     });
 
 
+    /* Routes for Bar Page */
+    $app->get("/show_bar_tokens/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $tokens = $bar->getAllTokens();
+        return $app['twig']->render("bar.html.twig", array(
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => true,
+        'show_menu' => false,
+        'edit_bar' => false
+        ));
+    });
+
+    $app->get("/show_menu_items/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $items = $bar->getAllItems();
+        return $app['twig']->render("bar.html.twig", array(
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => false,
+        'show_menu' => true,
+        'edit_bar' => false
+        ));
+    });
+
+    $app->get("/show_bar_edit/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        return $app['twig']->render("bar.html.twig", array(
+            'bar' => $bar,
+            'tokens' => $bar->getAllTokens(),
+            'items' => $bar->getAllItems(),
+            'get_tokens' => false,
+            'show_menu' => false,
+            'edit_bar' => true
+        ));
+    });
+
+    $app->patch("/edit_bar/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $new_name = $_POST['name'];
+        $new_phone = $_POST['phone'];
+        $new_address = $_POST['address'];
+        $new_website = $_POST['website'];
+        $bar->update($new_name, $new_phone, $new_address, $new_website);
+        return $app['twig']->render("bar.html.twig", array(
+            'bar' => $bar,
+            'tokens' => $bar->getAllTokens(),
+            'items' => $bar->getAllItems(),
+            'get_tokens' => false,
+            'show_menu' => false,
+            'edit_bar' => true
+        ));
+    });
+
+
+    $app->get("/about", function() use($app) {
+        return $app['twig']->render("about.html.twig");
+    });
+
     $app->get("/contact", function() use($app) {
         return $app['twig']->render("email.html.twig");
     });
@@ -213,6 +281,7 @@
             'edit_user' => false
             ));
     });
+
 
     return $app;
 

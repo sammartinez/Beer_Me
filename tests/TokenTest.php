@@ -158,6 +158,29 @@
             $this->assertEquals([$test_token2], $result);
         }
 
+        // function testGetPatronName()
+        // {
+        //     //Arrange
+        //     $patron_id = 1;
+        //     $menu_id = 2;
+        //     $sender_id = 3;
+        //     $test_token = new Token($patron_id, $menu_id, $sender_id);
+        //     $test_token->save();
+        //
+        //     $name = "Kyle Pratuch";
+        //     $email = "kyle.pratuch@gmail.com";
+        //     $test_patron = new Patron ($name, $email);
+        //     $test_patron->save();
+        //
+        //     //Act
+        //     $test_token->getPatronName();
+        //     $result = $name;
+        //
+        //     //Assert
+        //     $this->assertEquals();
+
+        }
+
     }
 
  ?>
