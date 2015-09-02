@@ -63,10 +63,10 @@
                 'tokens' => $bar->getAllTokens(),
                 'items' => $bar->getAllItems(),
                 'get_tokens' => false,
-                'show_menu' => false
+                'show_menu' => false,
+                'edit_bar' => false
                 ));
         }
-
     });
 
     $app->get("/show_email_search/{id}", function($id) use($app) {
@@ -151,7 +151,8 @@
         'tokens' => $bar->getAllTokens(),
         'items' => $bar->getAllItems(),
         'get_tokens' => true,
-        'show_menu' => false
+        'show_menu' => false,
+        'edit_bar' => false
         ));
     });
 
@@ -163,7 +164,20 @@
         'tokens' => $bar->getAllTokens(),
         'items' => $bar->getAllItems(),
         'get_tokens' => false,
-        'show_menu' => true
+        'show_menu' => true,
+        'edit_bar' => false
+        ));
+    });
+
+    $app->get("/show_bar_edit/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        return $app['twig']->render("bar.html.twig", array(
+            'bar' => $bar,
+            'tokens' => $bar->getAllTokens(),
+            'items' => $bar->getAllItems(),
+            'get_tokens' => false,
+            'show_menu' => false,
+            'edit_bar' => true
         ));
     });
 
