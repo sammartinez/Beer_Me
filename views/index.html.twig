@@ -48,9 +48,6 @@
                         <li>
                             <a class="page-scroll" href="/team">Team</a>
                         </li>
-                        <li>
-                            <a class="page-scroll" href="/contact">Contact</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -81,8 +78,7 @@
                             <label for="username">Enter your username:</label>
                             <input class="form-control" placeholder="Username" id="username" name="username" type="text" required>
                         </div>
-                        <button class="page-scroll btn btn-xl">Sign In</button>
-                        <!-- <a href="/login" class="page-scroll btn btn-xl">Sign In</a> -->
+                        <a href="/login" class="page-scroll btn btn-xl">Sign In</a>
                     </form>
                     </div>
                 </div>
@@ -100,9 +96,229 @@
                         </div>
                         <a href="/login" class="page-scroll btn btn-xl">Sign Up</a>
                     </form>
+
+                {% elseif about == true %}
+                <section id="about" class="bg-medium-gray">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="section-heading">About</h2>
+                                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="timeline">
+                                    <li>
+                                        <div class="timeline-image">
+                                            <img class="logo" src="img/domestic.png">
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-heading">
+                                                <h4>August 31, 2015</h4>
+                                                <h4 class="subheading">Our Humble Beginnings</h4>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-inverted">
+                                        <div class="timeline-image">
+                                            <img class="logo" src="img/domestic.png" alt="">
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-heading">
+                                                <h4>September 1, 2015</h4>
+                                                <h4 class="subheading">An App is Born</h4>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="timeline-image">
+                                            <img class="logo" src="img/domestic.png" alt="">
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-heading">
+                                                <h4>September 4, 2015</h4>
+                                                <h4 class="subheading">App Launch</h4>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-inverted">
+                                        <div class="timeline-image">
+                                            <img class="logo" src="img/domestic.png" alt="">
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-heading">
+                                                <h4>The Future</h4>
+                                                <h4 class="subheading">Global Domination</h4>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-inverted">
+                                        <div class="timeline-image">
+                                            <h4>Be Part
+                                                <br>Of Our
+                                                <br>Story!</h4>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {% elseif team == true %}
+                <!-- Team Section -->
+                <section id="team">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="section-heading">Our Amazing Team</h2>
+                                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="team-member">
+                                    <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+                                    <h4>Jason Bethel</h4>
+                                    <p class="text-muted">Developer</p>
+                                    <ul class="list-inline social-buttons">
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="team-member">
+                                    <img src="img/team/casey.jpg" class="img-responsive img-circle" alt="">
+                                    <h4>Casey Heitz</h4>
+                                    <p class="text-muted">Developer</p>
+                                    <ul class="list-inline social-buttons">
+                                        <li><a href="https://www.twitter.com/caseyheitz"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li><a href="https://www.facebook.com/heitz.casey?fref=ts"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li><a href="https://www.linkedin.com/pub/casey-heitz/55/762/205"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="team-member">
+                                    <img src="img/team/jordan.jpg" class="img-responsive img-circle" alt="">
+                                    <h4>Jordan Johansen</h4>
+                                    <p class="text-muted">Developer</p>
+                                    <ul class="list-inline social-buttons">
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li><a href="https://www.facebook.com/jordan.johansen.14?fref=ts"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="team-member">
+                                    <img src="img/team/kelli.jpg" class="img-responsive img-circle" alt="">
+                                    <h4>Kelli Margaret</h4>
+                                    <p class="text-muted">Developer</p>
+                                    <ul class="list-inline social-buttons">
+                                        <li><a href="https://twitter.com/kellimargaret"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li><a href="https://www.facebook.com/kelli.margaret"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li><a href="https://www.linkedin.com/pub/kelli-sommerdyke/97/613/648"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="team-member">
+                                    <img src="img/team/sam.jpg" class="img-responsive img-circle" alt="">
+                                    <h4>Sam Martinez</h4>
+                                    <p class="text-muted">Founder + Developer</p>
+                                    <ul class="list-inline social-buttons">
+                                        <li><a href="https://twitter.com/sam_martinez22"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li><a href="https://www.facebook.com/sam.martinez.7503?fref=ts"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li><a href="https://www.linkedin.com/pub/sam-martinez/53/3b6/972"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="team-member">
+                                    <img src="img/team/kyle.jpg" class="img-responsive img-circle" alt="">
+                                    <h4>Kyle Pratuch</h4>
+                                    <p class="text-muted">Developer</p>
+                                    <ul class="list-inline social-buttons">
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-offset-2 text-center">
+                                <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 {% endif %}
+
             </div>
         </section>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="copyright">Copyright &copy; Beer Me 2015</span>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline social-buttons">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-inline quicklinks">
+                            <li><a href="#">Privacy Policy</a>
+                            </li>
+                            <li><a href="#">Terms of Use</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
 
             <!-- jQuery -->
@@ -117,7 +333,15 @@
             <script src="js/cbpAnimatedHeader.js"></script>
 
             <!-- Contact Form JavaScript -->
+<<<<<<< HEAD
+
             <!-- <script src="js/jqBootstrapValidation.js"></script> -->
+
+            <!-- // <script src="js/jqBootstrapValidation.js"></script> -->
+
+=======
+            <!-- <script src="js/jqBootstrapValidation.js"></script> -->
+>>>>>>> 0abd19fb88aeab3e9a0d3fc9eb3ce9f1f13500b3
             <script src="js/contact_me.js"></script>
 
             <!-- Custom Theme JavaScript -->
