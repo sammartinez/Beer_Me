@@ -66,6 +66,7 @@
                 <select id='delete_bar' name='delete_bar'>
                     {% for bar in user.getPreferredBars %}
                         <option value='{{ bar.getId }}'>{{ bar.getName }}</option>
+                        <input name='bar' type='hidden' value='delete'>
                     {% endfor %}
                 </select>
                 <button type='submit'>Delete preferred bar</button>
