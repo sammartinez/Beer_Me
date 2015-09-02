@@ -272,6 +272,121 @@
             ));
     });
 
+    $app->get("/find_friend/{id}", function($id) use($app) {
+        $user = Patron::find($id);
+        $friend_username = $_GET['search_email'];
+        $friend = Patron::search($friend_username);
+        $friend_bars = $friend->getPreferredBars();
+        $selected_bar = [];
+        $shopping_cart = null;
+        $displayed_cart = null;
+        return $app['twig']->render("send_token.html.twig", array(
+            'user' => $user,
+            'friend' => $friend,
+            'friend_bars' => $friend_bars,
+            'selected_bar' => $selected_bar,
+            'shopping_cart' => $shopping_cart,
+            'displayed_cart' => $displayed_cart
+        ));
+    });
+
+    $app->get("/select_bar/{id}/{friend_id}", function($id, $friend_id) use($app) {
+        $user = Patron::find($id);
+        $friend = Patron::find($friend_id);
+        $friend_bars = $friend->getPreferredBars();
+        $selected_bar = [];
+        $shopping_cart = null;
+        $displayed_cart = null;
+        return $app['twig']->render("send_token.html.twig", array(
+            'user' => $user,
+            'friend' => $friend,
+            'friend_bars' => $friend_bars,
+            'selected_bar' => $selected_bar,
+            'shopping_cart' => $shopping_cart,
+            'displayed_cart' => $displayed_cart
+        ));
+    });
+
+    $app->post("/select_bar/{id}/{friend_id}", function($id, $friend_id) use($app) {
+        $user = Patron::find($id);
+        $friend = Patron::find($friend_id);
+        $friend_bars = $friend->getPreferredBars();
+        $selected_bar = Bar::find($_POST['select_bar']);
+        $shopping_cart = null;
+        $displayed_cart = null;
+        return $app['twig']->render("send_token.html.twig", array(
+            'user' => $user,
+            'friend' => $friend,
+            'friend_bars' => $friend_bars,
+            'selected_bar' => $selected_bar,
+            'shopping_cart' => $shopping_cart,
+            'displayed_cart' => $displayed_cart
+        ));
+    });
+
+    $app->post("/add_token/{id}/{friend_id}/{bar_id}", function($id, $friend_id, $bar_id) use($app) {
+        $user = Patron::find($id);
+        $friend = Patron::find($friend_id);
+        $friend_bars = $friend->getPreferredBars();
+        $selected_bar = Bar::find($bar_id);
+        $item_id = $_POST['item_id'];
+        $item = Item::find($item_id);
+        $menu_id = $selected_bar->getMenuId($item);
+        $new_token = new Token($friend_id, $menu_id, $id);
+        $new_token->save();
+        return $app['twig']->render("token_confirmation.html.twig", array('user' => $user, 'friend' => $friend));
+    });
+
+    // $app->post("/add_token/{id}/{friend_id}/{bar_id}", function($id, $friend_id, $bar_id) use($app) {
+    //     $user = Patron::find($id);
+    //     $friend = Patron::find($friend_id);
+    //     $friend_bars = $friend->getPreferredBars();
+    //     $selected_bar = Bar::find($bar_id);
+    //     $item_id = $_POST['item_id'];
+    //     $item = Item::find($item_id);
+    //     $menu_id = $selected_bar->getMenuId($item);
+    //     $new_token = new Token($friend_id, $menu_id, $id);
+    //     // var_dump($new_token);
+    //     $shopping_cart = [$_POST['shopping_cart']];
+    //     // $shopping_cart = array();
+    //     // var_dump($shopping_cart);
+    //     array_push($shopping_cart, $new_token);
+    //     var_dump($shopping_cart);
+    //     // if ($shopping_cart != array()) {
+    //     //     $shopping_cart = array_push($shopping_cart, $new_token);
+    //     // } else {
+    //     //     $shopping_cart = array();
+    //     //     $shopping_cart = array_push($shopping_cart, $new_token);
+    //     // }
+    //
+    //
+    //     // $item = $selected_bar->getItem($menu_id);
+    //     $displayed_cart = array($_POST['displayed_cart']);
+    //     $displayed_cart = array_push($displayed_cart, $item);
+    //
+    //     return $app['twig']->render("send_token.html.twig", array(
+    //         'user' => $user,
+    //         'friend' => $friend,
+    //         'friend_bars' => $friend_bars,
+    //         'selected_bar' => $selected_bar,
+    //         'shopping_cart' => $shopping_cart,
+    //         'displayed_cart' => $displayed_cart
+    //     ));
+    // });
+    //
+    // $app->post("submit_token/{id}/{friend_id}", function ($id, $friend_id) use ($app) {
+    //     $user = Patron::find($id);
+    //     $friend = Patron::find($friend_id);
+    //     $shopping_cart = $_POST['current_shopping_cart'];
+    //     foreach($shopping_cart as $token) {
+    //         $patron_id = $token['patron_id'];
+    //         $menu_id = $token['menu_id'];
+    //         $sender_id = $token['sender_id'];
+    //         $new_token = new Token($patron_id, $menu_id, $sender_id);
+    //         $new_token->save();
+    //     }
+    //     return $app['twig']->render("token_confirmation.html.twig", array('user' => $user, 'friend' => $friend));
+    // });
 
     return $app;
 ?>
