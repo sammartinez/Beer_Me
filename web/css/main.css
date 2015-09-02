@@ -10,12 +10,14 @@ body {
     background-color: #000;
 }
 
+.border-solid {
+    border-bottom-style: solid;
+}
+
     .layout {
     text-align:left;
     padding: 15px;
-    margin: 45px;
-    align-content: center;
-
+    margin: 50px;
 }
 
 .text-muted {
