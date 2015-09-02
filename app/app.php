@@ -29,15 +29,23 @@
 
     //Get Calls
     $app->get("/", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('sign_in' => false, 'sign_up' => false));
+        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => false));
     });
 
     $app->get("/signup", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('sign_in' => false, 'sign_up' => true));
+        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false));
     });
 
     $app->get("/signin", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('sign_in' => true, 'sign_up' => false));
+        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => true, 'team' => false));
+    });
+
+    $app->get("/about", function() use($app) {
+        return $app['twig']->render("index.html.twig", array('about' => true, 'sign_up' => false, "sign_in" => false, 'team' => false));
+    });
+
+    $app->get("/team", function() use($app) {
+        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => true));
     });
 
 
@@ -142,6 +150,7 @@
             ));
     });
 
+
     /* Routes for Bar Page */
     $app->get("/show_bar_tokens/{id}", function($id) use($app) {
         $bar = Bar::find($id);
@@ -207,7 +216,7 @@
         return $app['twig']->render("email.html.twig");
     });
 
-    $app->post("/email_send", function() use($app) {
+    $app->get("/email_send", function() use($app) {
         $mail = new PHPMailer();
         // $mail->SMTPDebug = 3;
         $mail->isSMTP();
