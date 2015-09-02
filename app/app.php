@@ -5,7 +5,7 @@
     require_once __DIR__."/../src/Bar.php";
     require_once __DIR__."/../src/Item.php";
     require_once __DIR__."/../src/Patron.php";
-
+    require_once __DIR__."/../src/Token.php";
 
 
     $app = New Silex\Application();
@@ -249,13 +249,26 @@
         $friend_bars = $friend->getPreferredBars();
         $selected_bar = Bar::find($bar_id);
         $item_id = $_POST['item_id'];
-        $menu_id = $selected_bar->getMenuId($item_id);
+        $item = Item::find($item_id);
+        $menu_id = $selected_bar->getMenuId($item);
         $new_token = new Token($friend_id, $menu_id, $id);
-        $shopping_cart = $_POST['current_shopping_cart'];
-        array_push($shopping_cart, $new_token);
-        $added_item = $selected_bar->getItem($menu_id);
-        $displayed_cart = $_POST['current_displayed_cart'];
-        array_push($displayed_cart, $added_item);
+
+        $shopping_cart = [$_POST['shopping_cart']];
+        if(in_array("", $shopping_cart)) {
+            $shopping_cart = $new_token;
+        }
+        else {
+            array_push($shopping_cart, $new_token);
+        }
+
+        // $item = $selected_bar->getItem($menu_id);
+        $displayed_cart = [$_POST['displayed_cart']];
+        if(in_array("", $displayed_cart)) {
+            $displayed_cart = $item;
+            var_dump($displayed_cart);
+        } else {
+            array_push($displayed_cart, $item);
+        }
         return $app['twig']->render("send_token.html.twig", array(
             'user' => $user,
             'friend' => $friend,

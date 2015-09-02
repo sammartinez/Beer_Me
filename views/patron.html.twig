@@ -70,7 +70,7 @@
                     {% if send_token == true %}
                     <h2>Find a friend:</h2>
 
-                        <form action='/find_friend'>
+                        <form action='/find_friend/{{ user.getId }}'>
                             <label for='search_email'>Your friend's email</label>
                             <input id='search_email' name='search_email' type='text' placeholder='buddy@email.com' required>
                             <button type='submit' class='btn btn-default'>Search</button>
