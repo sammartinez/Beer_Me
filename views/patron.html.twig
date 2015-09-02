@@ -134,10 +134,9 @@
                     <form action='/delete_preferred_bar/{{ user.getId }}' method='post'>
                         <input name='_method' type='hidden' value='delete'>
                         <label>Delete a bar</label>
-                        <select>
+                        <select name='bar'>
                             {% for bar in user.getPreferredBars %}
-                                <option value='{{ bar.getId }}'>{{ bar.getName }}
-                                <input name='bar' type='hidden' value='{{ bar.getId }}'></option>
+                                <option value='{{ bar.getId }}'>{{ bar.getName }}</option>
                             {% endfor %}
                         </select>
                         <button type='submit' class='btn btn-danger'>Delete preferred bar</button>

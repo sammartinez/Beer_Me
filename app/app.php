@@ -66,7 +66,9 @@
                 'token_form' => false,
                 'edit_user' => false
 
-            ));} else {
+            ));
+
+            } else {
             return $app['twig']->render("bar.html.twig", array(
                 'bar' => $bar,
                 'tokens' => $bar->getAllTokens(),
@@ -74,9 +76,10 @@
                 'get_tokens' => false,
                 'show_menu' => false,
                 'edit_bar' => false
-                ));
+            ));
         }
 
+    });
 
     $app->get("/show_email_search/{id}", function($id) use($app) {
         $user = Patron::find($id);
@@ -284,5 +287,4 @@
 
 
     return $app;
-
 ?>
