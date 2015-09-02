@@ -145,7 +145,47 @@
             </div>
         </section>
 
+        <a href='/show_user_edit/{{ user.getId }}'><h1>Edit Profile</h1></a>
+        {% if edit_user == true %}
+            <form action='/edit_user/{{ user.getId }}' method='post'>
+                <input name='_method' type='hidden' value='patch'>
+                <label for='name'>Name</label>
+                <input id='name' name='name' type='text' value= {{ user.getName }} required>
+                <label for='email'>Email</label>
+                <input id='email' name='email' type='text' value= {{ user.getEmail }} required>
+                <button type='submit'>Update</button>
+            </form>
+        {% endif %}
 
+        <a href='/show_preferred_bars/{{ user.getId }}'><h1>Your favorite bars</h1></a>
+        {% if preferred_bars == true %}
+        <h4>Here are your preferred bars:</h4>
+        <ul>
+            {% for bar in user.getPreferredBars %}
+                <li>{{ bar.getName }}</li>
+            {% endfor %}
+        </ul>
+            <form action='/add_preferred_bar/{{ user.getId }}' method='post'>
+                <label for='add_bar'>Participating bars</label>
+                <select id='add_bar' name='add_bar'>
+                    {% for bar in all_bars %} {# Remove already added bars from this list #}
+                        <option value='{{ bar.getId }}'>{{ bar.getName }}</option>
+                    {% endfor %}
+                </select>
+                <button type='submit'>Add bar</button>
+            </form>
+            <form action='/delete_preferred_bar/{{ user.getId }}' method='post'>
+                <input name='_method' type='hidden' value='delete'>
+                <label>Delete a bar</label>
+                <select>
+                    {% for bar in user.getPreferredBars %}
+                        <option value='{{ bar.getId }}'>{{ bar.getName }}</option>
+                        <input name='bar' type='hidden' value='{{ bar.getId }}'>
+                    {% endfor %}
+                </select>
+                <button type='submit'>Delete preferred bar</button>
+            </form>
+        {% endif %}
 
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
