@@ -11,7 +11,7 @@
     $app = New Silex\Application();
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=beer';
+    $server = 'mysql:host=localhost:8889;dbname=beer';
     $username = 'root';
     $password = 'root';
 
@@ -135,7 +135,7 @@
     });
 
 
-    $app->post("/email_send", function() use($app) {
+    $app->get("/email_send", function() use($app) {
         $mail = new PHPMailer();
         // $mail->SMTPDebug = 3;
         $mail->isSMTP();
