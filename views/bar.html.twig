@@ -5,10 +5,8 @@
     <body>
         <h1>Welcome, {{ bar.getName }}</h1>
 
-        <a href="/show_bar_tokens/{{ bar.getId }}"><h1>Unredeemed Tokens</h1></a>
+        <a href="/show_bar_tokens/{{ bar.getId }}"><h1>Tokens</h1></a>
             {% if get_tokens == true %}
-                <h2> {{ bar.getName }}'s Tokens: </h2>
-
                 {% for token in tokens %}
                     <ul>
                         <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }} </li></a>
@@ -16,14 +14,29 @@
                 {% endfor %}
             {% endif %}
 
-        <a href="/show_menu_items/{{ bar.getId }}"><h1>Menu Items<h1></a>
+        <a href="/show_menu_items/{{ bar.getId }}"><h1>Menu Items</h1></a>
             {% if show_menu == true %}
-                <h2> {{ bar.getName }}'s Menu: </h2>
                     {% for item in items %}
                         <ul>
-                            <a href="item/{{ item.getId }}"><li>{{ item.getDescription }} </li></a>
+                            <li>
+                                <form action="/edit_item/{{ bar.getId }}/{{ item.getId }}" method="post">
+                                    <input name="_method" type="hidden" value="patch">
+                                    <label for="description">Item</label>
+                                    <input id="description" name="description" value= {{ item.getDescription }} required>
+                                    <label for="cost">Cost $</label>
+                                    <input id="cost" name="cost" value= {{ item.getCost}}></input>
+                                    <button type="submit">Update</button>
+                                </form>
+                            </li>
                         </ul>
                     {% endfor %}
+                    <form action="/add_item/{{ bar.getId }}" method="post">
+                        <label for="description">Item</label>
+                        <input id="description" name="description">
+                        <label for="cost">Cost $</label>
+                        <input id="cost" name="cost"></input>
+                        <button type="submit">Add Item</button
+                    </form>
             {% endif %}
 
         <a href="/show_bar_edit/{{ bar.getId }}"><h1>Edit Profile</h1></a>

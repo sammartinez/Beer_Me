@@ -75,7 +75,8 @@
                 'show_menu' => false,
                 'edit_bar' => false
                 ));
-        }
+            }
+    });
 
 
     $app->get("/show_email_search/{id}", function($id) use($app) {
@@ -169,6 +170,35 @@
     $app->get("/show_menu_items/{id}", function($id) use($app) {
         $bar = Bar::find($id);
         $items = $bar->getAllItems();
+        return $app['twig']->render("bar.html.twig", array(
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => false,
+        'show_menu' => true,
+        'edit_bar' => false
+        ));
+    });
+
+    $app->patch("/edit_item/{bar_id}/{item_id}", function($bar_id, $item_id) use($app) {
+        $item = Item::find($item_id);
+        $item->update($_POST['description'], $_POST['cost']);
+        $bar = Bar::find($bar_id);
+        return $app['twig']->render("bar.html.twig", array(
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => false,
+        'show_menu' => true,
+        'edit_bar' => false
+        ));
+    });
+
+    $app->post("/add_item/{bar_id}", function($bar_id) use($app) {
+        $bar = Bar::find($bar_id);
+        $item = new Item($_POST['description'], $_POST['item']);
+        $item->save();
+        $bar->addItem($item);
         return $app['twig']->render("bar.html.twig", array(
         'bar' => $bar,
         'tokens' => $bar->getAllTokens(),
