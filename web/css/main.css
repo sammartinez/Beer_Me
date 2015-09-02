@@ -10,9 +10,12 @@ body {
     background-color: #000;
 }
 
-.layout {
+    .layout {
     text-align:left;
-    
+    padding: 15px;
+    margin: 45px;
+    align-content: center;
+
 }
 
 .text-muted {
