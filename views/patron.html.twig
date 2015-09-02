@@ -58,7 +58,7 @@
             </div>
         </nav>
 
-        <section id="portfolio">
+        <section class="layout">
         <div class="container">
             <div class="row">
             <div class="col-lg-12 text-left">
@@ -122,12 +122,13 @@
                     </select>
                     <button type='submit'>Add bar</button>
                 </form>
-                <form action='/delete_preferred_bar/{{ user.getId }}/' method='post'>
+                <form action='/delete_preferred_bar/{{ user.getId }}' method='post'>
                     <input name='_method' type='hidden' value='delete'>
-                    <label for='delete_bar'>Delete a bar</label>
-                    <select id='delete_bar' name='delete_bar'>
+                    <label>Delete a bar</label>
+                    <select>
                         {% for bar in user.getPreferredBars %}
                             <option value='{{ bar.getId }}'>{{ bar.getName }}</option>
+                            <input name='bar' type='hidden' value='{{ bar.getId }}'>
                         {% endfor %}
                     </select>
                     <button type='submit'>Delete preferred bar</button>
@@ -179,6 +180,7 @@
                 <button type='submit'>Delete preferred bar</button>
             </form>
         {% endif %}
+
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
 
