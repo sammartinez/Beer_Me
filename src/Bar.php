@@ -114,6 +114,11 @@
             return $tokens;
         }
 
+        function deleteToken()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM tokens WHERE id = {$this->getId()};");
+        }
+
 
         //Items Method
         function addItem($item)
