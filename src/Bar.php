@@ -154,6 +154,24 @@
             return $menu_ids[0];
         }
 
+        function getItem($menu_id)
+        {
+            $results = $GLOBALS['DB']->query("SELECT items.* FROM
+                            bars JOIN menus ON (bars.id = menus.bar_id)
+                            JOIN items ON (menus.item_id = items.id)
+                            WHERE bars.id = {$this->getId()} AND menus.id = {$menu_id};");
+
+            $items = array();
+            foreach($results as $item) {
+                $item_description = $item['description'];
+                $item_cost = $item['cost'];
+                $item_id = $item['id'];
+                $new_item = new Item($item_description, $item_cost, $item_id);
+                array_push($items, $new_item);
+            }
+            return $items;
+        }
+
         //Static Methods
         static function getAll()
         {
