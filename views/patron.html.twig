@@ -138,8 +138,6 @@
             </div>
         </section>
 
-        {% endif %}
-
         <a href='/show_user_edit/{{ user.getId }}'><h1>Edit Profile</h1></a>
         {% if edit_user == true %}
             <form action='/edit_user/{{ user.getId }}' method='post'>
