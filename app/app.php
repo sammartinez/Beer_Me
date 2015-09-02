@@ -183,21 +183,22 @@
             ));
     });
 
-    // $app->delete("/delete_preferred_bar/{id}/{bar_id}", function($id, $bar_id) use($app) {
-    //     $user = Patron::find($id);
-    //     $all_bars = Bar::getAll();
-    //     $bar = Bar::find($bar_id);
-    //     $user->deleteBar($bar);
-    //     return $app['twig']->render("patron.html.twig", array(
-    //         'user' => $user,
-    //         'user_tokens' =>$user->getTokens(),
-    //         'all_bars' => $all_bars,
-    //         'preferred_bars' => false,
-    //         'send_token' => false,
-    //         'token_form' => false,
-    //         'edit_user' => false
-    //         ));
-    // });
+    $app->delete("/delete_preferred_bar/{id}", function($id) use($app) {
+        $user = Patron::find($id);
+        $all_bars = Bar::getAll();
+        $bar = $_POST['bar'];
+        $found_bar = Bar::find($bar);
+        $user->deleteBar($found_bar);
+        return $app['twig']->render("patron.html.twig", array(
+            'user' => $user,
+            'user_tokens' =>$user->getTokens(),
+            'all_bars' => $all_bars,
+            'preferred_bars' => true,
+            'send_token' => false,
+            'token_form' => false,
+            'edit_user' => false
+            ));
+    });
 
     return $app;
 
