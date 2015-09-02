@@ -8,6 +8,20 @@ body {
     overflow-x: hidden;
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #000;
+
+}
+
+.border-solid {
+    border-bottom-style: solid;
+    color: #e0dee0;
+    text-shadow: -5px 2px 25px #444344;
+
+}
+
+    .layout {
+    text-align:left;
+    padding: 15px;
+    margin: 50px;
 }
 
 .text-muted {
@@ -70,7 +84,7 @@ h6 {
 }
 
 .bg-medium-gray {
-    background-color: #BABABA;
+    background-color: #BABABA, linear-gradient(0deg, #BABABA, transparent 20%);
 }
 
 .btn-primary {
@@ -333,7 +347,7 @@ section {
 }
 
 section h2.section-heading {
-    margin-top: 30;
+    margin-top: -50px;
     margin-bottom: 15px;
     font-size: 40px;
     color: #fff;
@@ -665,8 +679,6 @@ section#sign-in .section-heading {
 }
 
 section#contact {
-    background-color: #222;
-    background-image: url(../img/map-image.png);
     background-position: center;
     background-repeat: no-repeat;
     padding-top: 30px;
