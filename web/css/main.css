@@ -8,11 +8,14 @@ body {
     overflow-x: hidden;
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #000;
+
 }
 
 .border-solid {
     border-bottom-style: solid;
-    transition: all 0.5s ease-out;
+    color: #E7E3E4;
+    text-shadow: -5px 2px 25px #444344;
+
 }
 
     .layout {
