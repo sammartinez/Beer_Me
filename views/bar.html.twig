@@ -11,9 +11,21 @@
 
                 {% for token in tokens %}
                     <ul>
-                        <li> {{ token.getPatronName }} </li>
+                        <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }} </li></a>
                     </ul>
                 {% endfor %}
             {% endif %}
+
+        <a href="/show_menu_items/{{ bar.getId }}"><h1>Menu Items<h1></a>
+            {% if show_menu == true %}
+                <h2> {{ bar.getName }}'s Menu: </h2>
+                    {% for item in items %}
+                        <ul>
+                            <a href="item/{{ item.getId }}"><li>{{ item.getDescription }} </li></a>
+                        </ul>
+                    {% endfor %}
+            {% endif %}
+
+
     </body>
 </html>
