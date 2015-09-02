@@ -181,6 +181,22 @@
         ));
     });
 
+    $app->patch("/edit_bar/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $new_name = $_POST['name'];
+        $new_phone = $_POST['phone'];
+        $new_address = $_POST['address'];
+        $new_website = $_POST['website'];
+        $bar->update($new_name, $new_phone, $new_address, $new_website);
+        return $app['twig']->render("bar.html.twig", array(
+            'bar' => $bar,
+            'tokens' => $bar->getAllTokens(),
+            'items' => $bar->getAllItems(),
+            'get_tokens' => false,
+            'show_menu' => false,
+            'edit_bar' => true
+        ));
+    });
 
 
     $app->get("/about", function() use($app) {
