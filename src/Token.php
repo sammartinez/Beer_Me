@@ -101,6 +101,11 @@
             }
             return $menu_items;
         }
+
+        function getPatronName()
+        {
+            $returned_patrons = $GLOBALS['DB']->query("SELECT patrons.name FROM patrons WHERE id = {$this->getPatronId()};");
+        }
     }
 
  ?>
