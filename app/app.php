@@ -5,13 +5,14 @@
     require_once __DIR__."/../src/Bar.php";
     require_once __DIR__."/../src/Item.php";
     require_once __DIR__."/../src/Patron.php";
+    require_once __DIR__."/../src/Token.php";
 
 
 
     $app = New Silex\Application();
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost:8889;dbname=beer';
+    $server = 'mysql:host=localhost;dbname=beer';
     $username = 'root';
     $password = 'root';
 
@@ -27,25 +28,25 @@
     Request::enableHttpMethodParameterOverride();
 
     //Get Calls
-    $app->get("/", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => false));
-    });
+        $app->get("/", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => false));
+        });
 
-    $app->get("/signup", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false));
-    });
+        $app->get("/signup", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false));
+        });
 
-    $app->get("/signin", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => true, 'team' => false));
-    });
+        $app->get("/signin", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => true, 'team' => false));
+        });
 
-    $app->get("/about", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('about' => true, 'sign_up' => false, "sign_in" => false, 'team' => false));
-    });
+        $app->get("/about", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => true, 'sign_up' => false, "sign_in" => false, 'team' => false));
+        });
 
-    $app->get("/team", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => true));
-    });
+        $app->get("/team", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => true));
+        });
 
 
     $app->get("/login", function() use($app) {
@@ -64,9 +65,9 @@
                 'send_token' => false,
                 'token_form' => false,
                 'edit_user' => false
-            ));} else {
-            return $app['twig']->render("bar.html.twig", array('bar' => $bar));
+            ));
         }
+            return $app['twig']->render("bar.html.twig", array('bar' => $bar));
 
     });
 
