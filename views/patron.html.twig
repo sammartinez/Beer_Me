@@ -60,7 +60,7 @@
                 </select>
                 <button type='submit'>Add bar</button>
             </form>
-            <form action='/delete_preferred_bar/{{ user.getId }}/{{ bar.getId }}' method='post'>
+            <form action='/delete_preferred_bar/{{ user.getId }}/' method='post'>
                 <input name='_method' type='hidden' value='delete'>
                 <label for='delete_bar'>Delete a bar</label>
                 <select id='delete_bar' name='delete_bar'>

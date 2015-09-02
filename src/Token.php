@@ -99,7 +99,8 @@
                 // $id = ['id'];
                 array_push($menu_items, $item_id);
             }
-        } return $menu_items;
+            return $menu_items;
+        }
     }
 
  ?>
