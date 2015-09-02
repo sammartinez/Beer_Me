@@ -21,6 +21,8 @@ body {
     text-align:left;
     padding: 15px;
     margin: 60px;
+
+
 }
 
 .text-muted {
@@ -678,8 +680,6 @@ section#sign-in .section-heading {
 }
 
 section#contact {
-    background-color: #222;
-    background-image: url(../img/map-image.png);
     background-position: center;
     background-repeat: no-repeat;
     padding-top: 30px;

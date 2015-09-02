@@ -8,7 +8,6 @@
     require_once __DIR__."/../src/Token.php";
 
 
-
     $app = New Silex\Application();
     $app['debug'] = true;
 
@@ -48,7 +47,6 @@
             return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => true));
         });
 
-
     $app->get("/login", function() use($app) {
         $username = $_GET['username'];
         $user = Patron::search($username);
@@ -65,8 +63,9 @@
                 'send_token' => false,
                 'token_form' => false,
                 'edit_user' => false
+            ));
 
-            ));} else {
+            } else {
             return $app['twig']->render("bar.html.twig", array(
                 'bar' => $bar,
                 'tokens' => $bar->getAllTokens(),
@@ -151,7 +150,6 @@
             'edit_user' => false
             ));
     });
-
 
     /* Routes for Bar Page */
     $app->get("/show_bar_tokens/{id}", function($id) use($app) {
@@ -238,15 +236,6 @@
         ));
     });
 
-
-    $app->get("/about", function() use($app) {
-        return $app['twig']->render("about.html.twig");
-    });
-
-    $app->get("/contact", function() use($app) {
-        return $app['twig']->render("email.html.twig");
-    });
-
     $app->get("/email_send", function() use($app) {
         $mail = new PHPMailer();
         // $mail->SMTPDebug = 3;
@@ -314,5 +303,4 @@
 
 
     return $app;
-
 ?>
