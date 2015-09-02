@@ -15,20 +15,14 @@ body {
     border-bottom-style: solid;
     color: #e0dee0;
     text-shadow: -5px 2px 25px #444344;
-<<<<<<< HEAD
-
-=======
->>>>>>> daa2b63d098604169b3418747cb5e774a3ed660e
 }
 
     .layout {
     text-align:left;
     padding: 15px;
-<<<<<<< HEAD
-    margin: 50px;
-=======
     margin: 60px;
->>>>>>> daa2b63d098604169b3418747cb5e774a3ed660e
+
+
 }
 
 .text-muted {
