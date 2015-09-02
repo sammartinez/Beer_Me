@@ -4,5 +4,16 @@
     </head>
     <body>
         <h1>Welcome, {{ bar.getName }}</h1>
+
+        <a href="/show_bar_tokens/{{ bar.getId }}"><h1>Unredeemed Tokens</h1></a>
+            {% if get_tokens == true %}
+                <h2> {{ bar.getName }}'s Tokens: </h2>
+
+                {% for token in tokens %}
+                    <ul>
+                        <li> {{ token.getPatronName }} </li>
+                    </ul>
+                {% endfor %}
+            {% endif %}
     </body>
 </html>
