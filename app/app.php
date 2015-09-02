@@ -28,15 +28,23 @@
 
     //Get Calls
     $app->get("/", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('sign_in' => false, 'sign_up' => false));
+        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => false));
     });
 
     $app->get("/signup", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('sign_in' => false, 'sign_up' => true));
+        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false));
     });
 
     $app->get("/signin", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('sign_in' => true, 'sign_up' => false));
+        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => true, 'team' => false));
+    });
+
+    $app->get("/about", function() use($app) {
+        return $app['twig']->render("index.html.twig", array('about' => true, 'sign_up' => false, "sign_in" => false, 'team' => false));
+    });
+
+    $app->get("/team", function() use($app) {
+        return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => true));
     });
 
 
@@ -45,15 +53,21 @@
         $user = Patron::search($username);
         $all_bars = Bar::getAll();
 
-        return $app['twig']->render("patron.html.twig", array(
-            'user' => $user,
-            'user_tokens' => $user->getTokens(),
-            'all_bars' => $all_bars,
-            'preferred_bars' => false,
-            'send_token' => false,
-            'token_form' => false,
-            'edit_user' => false
-            ));
+        $bar = Bar::search($username);
+
+        if($bar == NULL) {
+            return $app['twig']->render("patron.html.twig", array(
+                'user' => $user,
+                'user_tokens' => $user->getTokens(),
+                'all_bars' => $all_bars,
+                'preferred_bars' => false,
+                'send_token' => false,
+                'token_form' => false,
+                'edit_user' => false
+            ));} else {
+            return $app['twig']->render("bar.html.twig", array('bar' => $bar));
+        }
+
     });
 
     $app->get("/show_email_search/{id}", function($id) use($app) {
@@ -115,7 +129,6 @@
             ));
     });
 
-
     $app->get("/show_preferred_bars/{id}", function($id) use($app) {
         $user = Patron::find($id);
         $all_bars = Bar::getAll();
@@ -130,10 +143,10 @@
             ));
     });
 
-    $app->get("/about", function() use($app) {
-        return $app['twig']->render("about.html.twig");
-    });
 
+    $app->get("/contact", function() use($app) {
+        return $app['twig']->render("email.html.twig");
+    });
 
     $app->get("/email_send", function() use($app) {
         $mail = new PHPMailer();
@@ -183,21 +196,22 @@
             ));
     });
 
-    // $app->delete("/delete_preferred_bar/{id}/{bar_id}", function($id, $bar_id) use($app) {
-    //     $user = Patron::find($id);
-    //     $all_bars = Bar::getAll();
-    //     $bar = Bar::find($bar_id);
-    //     $user->deleteBar($bar);
-    //     return $app['twig']->render("patron.html.twig", array(
-    //         'user' => $user,
-    //         'user_tokens' =>$user->getTokens(),
-    //         'all_bars' => $all_bars,
-    //         'preferred_bars' => false,
-    //         'send_token' => false,
-    //         'token_form' => false,
-    //         'edit_user' => false
-    //         ));
-    // });
+    $app->delete("/delete_preferred_bar/{id}", function($id) use($app) {
+        $user = Patron::find($id);
+        $all_bars = Bar::getAll();
+        $bar = $_POST['bar'];
+        $found_bar = Bar::find($bar);
+        $user->deleteBar($found_bar);
+        return $app['twig']->render("patron.html.twig", array(
+            'user' => $user,
+            'user_tokens' =>$user->getTokens(),
+            'all_bars' => $all_bars,
+            'preferred_bars' => true,
+            'send_token' => false,
+            'token_form' => false,
+            'edit_user' => false
+            ));
+    });
 
     return $app;
 
