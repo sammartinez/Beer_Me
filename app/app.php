@@ -45,15 +45,21 @@
         $user = Patron::search($username);
         $all_bars = Bar::getAll();
 
-        return $app['twig']->render("patron.html.twig", array(
-            'user' => $user,
-            'user_tokens' => $user->getTokens(),
-            'all_bars' => $all_bars,
-            'preferred_bars' => false,
-            'send_token' => false,
-            'token_form' => false,
-            'edit_user' => false
-            ));
+        $bar = Bar::search($username);
+
+        if($bar == NULL) {
+            return $app['twig']->render("patron.html.twig", array(
+                'user' => $user,
+                'user_tokens' => $user->getTokens(),
+                'all_bars' => $all_bars,
+                'preferred_bars' => false,
+                'send_token' => false,
+                'token_form' => false,
+                'edit_user' => false
+            ));} else {
+            return $app['twig']->render("bar.html.twig", array('bar' => $bar));
+        }
+
     });
 
     $app->get("/show_email_search/{id}", function($id) use($app) {
@@ -114,7 +120,6 @@
             'edit_user' => false
             ));
     });
-
 
     $app->get("/show_preferred_bars/{id}", function($id) use($app) {
         $user = Patron::find($id);
