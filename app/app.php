@@ -134,6 +134,9 @@
         return $app['twig']->render("about.html.twig");
     });
 
+    $app->get("/contact", function() use($app) {
+        return $app['twig']->render("email.html.twig");
+    });
 
     $app->post("/email_send", function() use($app) {
         $mail = new PHPMailer();
