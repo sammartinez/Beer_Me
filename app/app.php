@@ -27,18 +27,25 @@
     Request::enableHttpMethodParameterOverride();
 
     //Get Calls
-    $app->get("/", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('sign_in' => false, 'sign_up' => false));
-    });
+        $app->get("/", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => false));
+        });
 
-    $app->get("/signup", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('sign_in' => false, 'sign_up' => true));
-    });
+        $app->get("/signup", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false));
+        });
 
-    $app->get("/signin", function() use($app) {
-        return $app['twig']->render("index.html.twig", array('sign_in' => true, 'sign_up' => false));
-    });
+        $app->get("/signin", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => true, 'team' => false));
+        });
 
+        $app->get("/about", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => true, 'sign_up' => false, "sign_in" => false, 'team' => false));
+        });
+
+        $app->get("/team", function() use($app) {
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => true));
+        });
 
     $app->get("/login", function() use($app) {
         $username = $_GET['username'];
@@ -56,8 +63,17 @@
                 'send_token' => false,
                 'token_form' => false,
                 'edit_user' => false
-            ));} else {
-            return $app['twig']->render("bar.html.twig", array('bar' => $bar));
+            ));
+
+            } else {
+            return $app['twig']->render("bar.html.twig", array(
+                'bar' => $bar,
+                'tokens' => $bar->getAllTokens(),
+                'items' => $bar->getAllItems(),
+                'get_tokens' => false,
+                'show_menu' => false,
+                'edit_bar' => false
+            ));
         }
 
     });
@@ -135,15 +151,63 @@
             ));
     });
 
-    $app->get("/about", function() use($app) {
-        return $app['twig']->render("about.html.twig");
+    /* Routes for Bar Page */
+    $app->get("/show_bar_tokens/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $tokens = $bar->getAllTokens();
+        return $app['twig']->render("bar.html.twig", array(
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => true,
+        'show_menu' => false,
+        'edit_bar' => false
+        ));
     });
 
-    $app->get("/contact", function() use($app) {
-        return $app['twig']->render("email.html.twig");
+    $app->get("/show_menu_items/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $items = $bar->getAllItems();
+        return $app['twig']->render("bar.html.twig", array(
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => false,
+        'show_menu' => true,
+        'edit_bar' => false
+        ));
     });
 
-    $app->post("/email_send", function() use($app) {
+    $app->get("/show_bar_edit/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        return $app['twig']->render("bar.html.twig", array(
+            'bar' => $bar,
+            'tokens' => $bar->getAllTokens(),
+            'items' => $bar->getAllItems(),
+            'get_tokens' => false,
+            'show_menu' => false,
+            'edit_bar' => true
+        ));
+    });
+
+    $app->patch("/edit_bar/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $new_name = $_POST['name'];
+        $new_phone = $_POST['phone'];
+        $new_address = $_POST['address'];
+        $new_website = $_POST['website'];
+        $bar->update($new_name, $new_phone, $new_address, $new_website);
+        return $app['twig']->render("bar.html.twig", array(
+            'bar' => $bar,
+            'tokens' => $bar->getAllTokens(),
+            'items' => $bar->getAllItems(),
+            'get_tokens' => false,
+            'show_menu' => false,
+            'edit_bar' => true
+        ));
+    });
+
+    $app->get("/email_send", function() use($app) {
         $mail = new PHPMailer();
         // $mail->SMTPDebug = 3;
         $mail->isSMTP();
@@ -325,5 +389,4 @@
     // });
 
     return $app;
-
 ?>
