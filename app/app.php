@@ -11,7 +11,7 @@
     $app = New Silex\Application();
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost:8889;dbname=beer';
+    $server = 'mysql:host=localhost;dbname=beer';
     $username = 'root';
     $password = 'root';
 
@@ -44,6 +44,7 @@
         $username = $_GET['username'];
         $user = Patron::search($username);
         $all_bars = Bar::getAll();
+
         return $app['twig']->render("patron.html.twig", array(
             'user' => $user,
             'user_tokens' => $user->getTokens(),
@@ -182,21 +183,21 @@
             ));
     });
 
-    $app->delete("/delete_preferred_bar/{id}/{bar_id}", function($id, $bar_id) use($app) {
-        $user = Patron::find($id);
-        $all_bars = Bar::getAll();
-        $bar = Bar::find($bar_id);
-        $user->deleteBar($bar);
-        return $app['twig']->render("patron.html.twig", array(
-            'user' => $user,
-            'user_tokens' =>$user->getTokens(),
-            'all_bars' => $all_bars,
-            'preferred_bars' => false,
-            'send_token' => false,
-            'token_form' => false,
-            'edit_user' => false
-            ));
-    });
+    // $app->delete("/delete_preferred_bar/{id}/{bar_id}", function($id, $bar_id) use($app) {
+    //     $user = Patron::find($id);
+    //     $all_bars = Bar::getAll();
+    //     $bar = Bar::find($bar_id);
+    //     $user->deleteBar($bar);
+    //     return $app['twig']->render("patron.html.twig", array(
+    //         'user' => $user,
+    //         'user_tokens' =>$user->getTokens(),
+    //         'all_bars' => $all_bars,
+    //         'preferred_bars' => false,
+    //         'send_token' => false,
+    //         'token_form' => false,
+    //         'edit_user' => false
+    //         ));
+    // });
 
     return $app;
 

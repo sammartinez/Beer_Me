@@ -70,15 +70,19 @@
         <section id="sign-in">
             <div class="container">
                 <div class="row">
+
                     <div class="col-lg-12">
                 {% if sign_in == true %}
+
                     <h2 class="section-heading">Log in to your account.</h2>
+
                     <form action="/login" method="get">
                         <div class="col-xs-3">
                             <label for="username">Enter your username:</label>
                             <input class="form-control" placeholder="Username" id="username" name="username" type="text" required>
                         </div>
-                        <a href="/login" class="page-scroll btn btn-xl">Sign In</a>
+                        <button type="submit" class="page-scroll btn btn-xl">Sign In</button>
+                        <!-- <a href="/login" class="page-scroll btn btn-xl">Sign In</a> -->
                     </form>
                     </div>
                 </div>
@@ -94,7 +98,7 @@
                             <label for="email">Enter your email:</label>
                             <input class="form-control input-lg" placeholder="Email Address" id="email" name="email" type="text" required>
                         </div>
-                        <a href="/login" class="page-scroll btn btn-xl">Sign In</a>
+                        <a href="/login" class="page-scroll btn btn-xl">Sign Up</a>
                     </form>
                 {% endif %}
             </div>
@@ -140,11 +144,15 @@
             <script src="js/cbpAnimatedHeader.js"></script>
 
             <!-- Contact Form JavaScript -->
+
             <!-- <script src="js/jqBootstrapValidation.js"></script> -->
+
+            <!-- // <script src="js/jqBootstrapValidation.js"></script> -->
+
             <script src="js/contact_me.js"></script>
 
             <!-- Custom Theme JavaScript -->
             <script src="js/agency.js"></script>
-        </header>
+
     </body>
 </html>
