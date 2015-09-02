@@ -149,7 +149,7 @@
 
         function deleteBar($bar)
         {
-            $GLOBALS['DB']->exec("DELETE * FROM preferbars WHERE patron_id = {$this->getId()} AND bar_id = {$bar->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM preferbars WHERE patron_id = {$this->getId()} AND bar_id = {$bar->getId()};");
         }
 
     }
