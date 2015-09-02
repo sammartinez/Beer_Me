@@ -5,6 +5,7 @@
     require_once __DIR__."/../src/Bar.php";
     require_once __DIR__."/../src/Item.php";
     require_once __DIR__."/../src/Patron.php";
+    require_once __DIR__."/../src/Token.php";
 
 
 
@@ -57,7 +58,12 @@
                 'token_form' => false,
                 'edit_user' => false
             ));} else {
-            return $app['twig']->render("bar.html.twig", array('bar' => $bar));
+            return $app['twig']->render("bar.html.twig", array(
+                'bar' => $bar,
+                'tokens' => $bar->getAllTokens(),
+                'items' => $bar->getAllItems(),
+                'get_tokens' => false
+                ));
         }
 
     });
@@ -207,6 +213,7 @@
             'edit_user' => false
             ));
     });
+
 
     return $app;
 
