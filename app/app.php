@@ -11,7 +11,7 @@
     $app = New Silex\Application();
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost:8889;dbname=beer';
+    $server = 'mysql:host=localhost;dbname=beer';
     $username = 'root';
     $password = 'root';
 
@@ -38,42 +38,6 @@
     $app->get("/signin", function() use($app) {
         return $app['twig']->render("index.html.twig", array('sign_in' => true, 'sign_up' => false));
     });
-
-    // $app->get("/email", function() use($app) {
-    //     return $app['twig']->render("email.html.twig", array('message' => null));
-    // });
-
-    // /* Testing mail shit */
-    // $app->post("/email_send", function() use($app) {
-    //     $mail = new PHPMailer();
-    //     // $mail->SMTPDebug = 3;
-    //     $mail->isSMTP();
-    //     $mail->Host = 'smtp.gmail.com';
-    //     $mail->SMTPAuth = true;
-    //     $mail->Username = 'beerme.token@gmail.com';
-    //     $mail->Password = 'b33rm3123';
-    //     $mail->STMPSecure = 'tls';
-    //     $mail->Port = 587;
-    //
-    //     $mail->From = 'beerme.token@gmail.com';
-    //     $mail->FromName = 'Beer Me!';
-    //     $mail->addAddress($_POST['email'], $_POST['name']);
-    //     $mail->addReplyTo('beerme.token@gmail.com', 'Beer Me!');
-    //     $mail->isHTML(true);
-    //
-    //     $mail->Subject = 'Somebody sent you a token!';
-    //     $mail->Body = 'HEY YOU GUYS!  LOOK WAT I DONE DID!!!!!!.';
-    //     $mail->AltBody = 'Received token.';
-    //
-    //     $email = $_POST['email'];
-    //     $name = $_POST['name'];
-    //     if(!$mail->send()) {
-    //         $message = 'Message could not be sent. <p>';
-    //     } else {
-    //         $message = 'Message has been sent.';
-    //     }
-    //     return $app['twig']->render("email.html.twig", array('message' => $message));
-    // });
 
 
     $app->get("/login", function() use($app) {
@@ -150,7 +114,6 @@
             ));
     });
 
-<<<<<<< HEAD
 
     $app->get("/show_preferred_bars/{id}", function($id) use($app) {
         $user = Patron::find($id);
@@ -164,12 +127,13 @@
             'token_form' => false,
             'edit_user' => false
             ));
-=======
+    });
+
     $app->get("/about", function() use($app) {
         return $app['twig']->render("about.html.twig");
     });
 
-    /* Testing mail shit */
+
     $app->post("/email_send", function() use($app) {
         $mail = new PHPMailer();
         // $mail->SMTPDebug = 3;
@@ -198,8 +162,8 @@
         } else {
             $message = 'Message has been sent.';
         }
+
         return $app['twig']->render("email.html.twig", array('message' => $message));
->>>>>>> master
     });
 
     $app->post("/add_preferred_bar/{id}", function($id) use($app) {
@@ -218,12 +182,10 @@
             ));
     });
 
-    /* Need to figure this shit out.  Can't get Bar ID from option value in delete preferred bars form.
-
-    $app->delete("/delete_preferred_bar/{id}", function($id) use($app) {
+    $app->delete("/delete_preferred_bar/{id}/{bar_id}", function($id, $bar_id) use($app) {
         $user = Patron::find($id);
         $all_bars = Bar::getAll();
-        $bar = Bar::find($_POST['delete_bar']);
+        $bar = Bar::find($bar_id);
         $user->deleteBar($bar);
         return $app['twig']->render("patron.html.twig", array(
             'user' => $user,
@@ -234,10 +196,7 @@
             'token_form' => false,
             'edit_user' => false
             ));
-    }); */
-
-
-
+    });
 
     return $app;
 
