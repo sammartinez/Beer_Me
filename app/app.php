@@ -7,6 +7,7 @@
     require_once __DIR__."/../src/Patron.php";
     require_once __DIR__."/../src/Token.php";
 
+
     $app = New Silex\Application();
     $app['debug'] = true;
 
