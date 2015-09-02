@@ -62,7 +62,8 @@
                 'bar' => $bar,
                 'tokens' => $bar->getAllTokens(),
                 'items' => $bar->getAllItems(),
-                'get_tokens' => false
+                'get_tokens' => false,
+                'show_menu' => false
                 ));
         }
 
@@ -140,6 +141,33 @@
             'edit_user' => false
             ));
     });
+
+    /* Routes for Bar Page */
+    $app->get("/show_bar_tokens/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $tokens = $bar->getAllTokens();
+        return $app['twig']->render("bar.html.twig", array(
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => true,
+        'show_menu' => false
+        ));
+    });
+
+    $app->get("/show_menu_items/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $items = $bar->getAllItems();
+        return $app['twig']->render("bar.html.twig", array(
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => false,
+        'show_menu' => true
+        ));
+    });
+
+
 
     $app->get("/about", function() use($app) {
         return $app['twig']->render("about.html.twig");
