@@ -15,13 +15,12 @@ body {
     border-bottom-style: solid;
     color: #e0dee0;
     text-shadow: -5px 2px 25px #444344;
-
 }
 
     .layout {
     text-align:left;
     padding: 15px;
-    margin: 50px;
+    margin: 60px;
 }
 
 .text-muted {
