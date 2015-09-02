@@ -254,6 +254,7 @@
             $test_patron->addPreferredBar($test_bar);
             $test_patron->addPreferredBar($test_bar2);
 
+
             //Act
             $result = $test_patron->getPreferredBars();
 

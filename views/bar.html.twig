@@ -4,5 +4,44 @@
     </head>
     <body>
         <h1>Welcome, {{ bar.getName }}</h1>
+
+        <a href="/show_bar_tokens/{{ bar.getId }}"><h1>Unredeemed Tokens</h1></a>
+            {% if get_tokens == true %}
+                <h2> {{ bar.getName }}'s Tokens: </h2>
+
+                {% for token in tokens %}
+                    <ul>
+                        <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }} </li></a>
+                    </ul>
+                {% endfor %}
+            {% endif %}
+
+        <a href="/show_menu_items/{{ bar.getId }}"><h1>Menu Items<h1></a>
+            {% if show_menu == true %}
+                <h2> {{ bar.getName }}'s Menu: </h2>
+                    {% for item in items %}
+                        <ul>
+                            <a href="item/{{ item.getId }}"><li>{{ item.getDescription }} </li></a>
+                        </ul>
+                    {% endfor %}
+            {% endif %}
+
+        <a href="/show_bar_edit/{{ bar.getId }}"><h1>Edit Profile</h1></a>
+            {% if edit_bar == true %}
+                <form action="/edit_bar/{{ bar.getId }}" method="post">
+                    <input name="_method" type="hidden" value="patch">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" value= {{ bar.getName }} required>
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="text" value= {{ bar.getPhone }} required>
+                    <label for="address">Address</label>
+                    <input id="address" name="address" type="text" value= {{ bar.getAddress }} required>
+                    <label for="website">Website</label>
+                    <input id="website" name="website" type="text" value= {{ bar.getWebsite }} required>
+                    <button type="submit">Update</button>
+                </form>
+            {% endif %}
+
+>>>>>>> daa2b63d098604169b3418747cb5e774a3ed660e
     </body>
 </html>
