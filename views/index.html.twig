@@ -63,7 +63,7 @@
             </div>
         </header>
 
-        <!-- Sign In/Sign Up -->
+        <!-- Sign In-->
         <section id="sign-in">
             <div class="container">
                 <div class="row">
@@ -83,7 +83,7 @@
                     </form>
                     </div>
                 </div>
-
+                <!-- Sign Up -->
                 {% elseif sign_up == true %}
                     <h2 class="section-heading">Create a new account.</h2>
                     <form action="/signup" method="post">
@@ -98,6 +98,7 @@
                         <button type="submit" class="page-scroll btn btn-xl">Sign Up</button>
                     </form>
 
+                <!-- About -->
                 {% elseif about == true %}
                 <section id="about" class="bg-medium-gray">
                     <div class="container">
@@ -333,8 +334,6 @@
             <script src="js/classie.js"></script>
             <script src="js/cbpAnimatedHeader.js"></script>
 
-            <!-- Contact Form JavaScript -->
-            <script src="js/contact_me.js"></script>
 
             <!-- Custom Theme JavaScript -->
             <script src="js/agency.js"></script>
