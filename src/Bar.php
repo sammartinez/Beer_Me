@@ -142,6 +142,18 @@
             return $items;
         }
 
+        function getMenuId($item)
+        {
+            $results = $GLOBALS['DB']->query("SELECT id FROM menus WHERE bar_id = {$this->getId()} AND item_id = {$item->getId()};");
+
+            $menu_ids = array();
+            foreach($results as $menu) {
+                $menu_id = $menu['id'];
+                array_push($menu_ids, $menu_id);
+            }
+            return $menu_ids[0];
+        }
+
         //Static Methods
         static function getAll()
         {

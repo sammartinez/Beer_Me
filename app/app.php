@@ -200,6 +200,55 @@
             ));
     });
 
+    $app->post("/find_friend/{id}", function($id) use($app) {
+        $user = Patron::find($id);
+        $friend_username = $_POST['search_email'];
+        $friend = Patron::search($friend_username);
+        $friend_bars = $friend->getPreferredBars();
+        $selected_bar = [];
+        $shopping_cart = null;
+        return $app['twig']->render("send_token.html.twig", array(
+            'user' => $user,
+            'friend' => $friend,
+            'friend_bars' => $friend_bars,
+            'selected_bar' => $selected_bar,
+            'shopping_cart' => $shopping_cart
+        ));
+    });
+
+    $app->post("/select_bar/{id}/{friend_id}", function($id, $friend_id) use($app) {
+        $user = Patron::find($id);
+        $friend = Patron::find($friend_id);
+        $friend_bars = $friend->getPreferredBars();
+        $selected_bar = Bar::find($_POST['select_bar']);
+        $shopping_cart = null;
+        return $app['twig']->render("send_token.html.twig", array(
+            'user' => $user,
+            'friend' => $friend,
+            'friend_bars' => $friend_bars,
+            'selected_bar' => $selected_bar,
+            'shopping_cart' => $shopping_cart
+        ));
+    });
+
+    $app->post("/add_token/{id}/{friend_id}/{bar_id}", function($id, $friend_id, $bar_id) use($app) {
+        $user = Patron::find($id);
+        $friend = Patron::find($friend_id);
+        $friend_bars = $friend->getPreferredBars();
+        $selected_bar = Bar::find($bar_id);
+        $item_id = $_POST['item_id'];
+        $new_token = new Token($friend_id, $selected_bar->getMenuId($item_id), $id);
+        $shopping_cart = $_POST['current_shopping_cart'];
+        array_push($shopping_cart, $new_token);
+        return $app['twig']->render("send_token.html.twig", array(
+            'user' => $user,
+            'friend' => $friend,
+            'friend_bars' => $friend_bars,
+            'selected_bar' => $selected_bar,
+            'shopping_cart' => $shopping_cart
+        ));
+    });
+
     return $app;
 
 ?>
