@@ -140,12 +140,12 @@
     //Get Show User Tokens
     $app->get("/show_user_tokens/{id}", function($id) use($app) {
         $user = Patron::find($id);
-        $all_bars = Bar::getAll();
+        $tokens = $user->getTokens();
 
         return $app['twig']->render("patron.html.twig", array(
             'user' => $user,
-            'user_tokens' =>$user->getTokens(),
-            'all_bars' => $all_bars,
+            'user_tokens' => $tokens,
+            // 'all_bars' => $all_bars,
             'preferred_bars' => false,
             'send_token' => false,
             'token_form' => true,
@@ -506,7 +506,7 @@
         $mail->SMTPAuth = true;
         $mail->Username = 'beerme.token@gmail.com';
         $mail->Password = 'b33rm3123';
-        $mail->STMPSecure = 'tls';
+        $mail->STMPSecure = 'ssl';
         $mail->Port = 587;
 
         $email_confirmation = $friend->getEmail();
