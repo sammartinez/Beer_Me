@@ -61,7 +61,11 @@
 
         $bar = Bar::search($username);
 
-        if($bar == NULL) {
+        if ($bar == NULL && $user == NULL) {
+
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => false));
+
+        } elseif($bar == NULL) {
 
             return $app['twig']->render("patron.html.twig", array(
                 'user' => $user,
@@ -73,7 +77,7 @@
                 'edit_user' => false
             ));
 
-            } else {
+        } else {
 
             return $app['twig']->render("bar.html.twig", array(
                 'bar' => $bar,
@@ -82,8 +86,8 @@
                 'get_tokens' => false,
                 'show_menu' => false,
                 'edit_bar' => false
-                ));
-            }
+            ));}
+
     });
 
     //Get Show email search
@@ -307,19 +311,31 @@
         $user = Patron::find($id);
         $friend_username = $_GET['search_email'];
         $friend = Patron::search($friend_username);
-        $friend_bars = $friend->getPreferredBars();
+        // $friend_bars = $friend->getPreferredBars();
         $selected_bar = [];
         $shopping_cart = null;
         $displayed_cart = null;
 
-        return $app['twig']->render("send_token.html.twig", array(
-            'user' => $user,
-            'friend' => $friend,
-            'friend_bars' => $friend_bars,
-            'selected_bar' => $selected_bar,
-            'shopping_cart' => $shopping_cart,
-            'displayed_cart' => $displayed_cart
+        if ($friend != NULL){
+            return $app['twig']->render("send_token.html.twig", array(
+                'user' => $user,
+                'friend' => $friend,
+                'friend_bars' => $friend->getPreferredBars(),
+                'selected_bar' => $selected_bar,
+                'shopping_cart' => $shopping_cart,
+                'displayed_cart' => $displayed_cart
         ));
+        } else {
+            return $app['twig']->render("patron.html.twig", array(
+                'user' => $user,
+                'user_tokens' =>$user->getTokens(),
+                'all_bars' => Bar::getAll(),
+                'preferred_bars' => false,
+                'send_token' => true,
+                'token_form' => false,
+                'edit_user' => false
+                ));
+        }
     });
 
     //Get Select Bar {id}
