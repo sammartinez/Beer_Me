@@ -54,7 +54,7 @@
     </nav>
 
     <body>
-
+        <!-- Header -->
         <header class="bar-header">
             <div class="container">
                 <div class="intro-text">
@@ -64,38 +64,28 @@
             </div>
         </header>
 
-        <!-- Portfolio Grid Section -->
-        <section id="portfolio">
+        <section class="layout">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <a href="/login?username={{ bar.getName }}"><h2 class="section-heading">{{ bar.getName }}</h2></a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <a href="/show_bar_tokens/{{bar.getId}}" class="portfolio-link" data-toggle="modal">
-                        <!-- <div class="portfolio-caption"> -->
-                            <button type="submit" class="page-scroll btn btn-xl"><h4>Unredeemed<br> Tokens</h4></button></a>
-                        </div>
-                        <div class="col-xs-3">
-                            {% if get_tokens == true %}
-                                {% for token in tokens | sort %}
-                                    <ul>
-                                        <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }} </li></a>
-                                    </ul>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                        </a>
-                    </div>
-                    <div class="row">
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <a href="/show_menu_items/{{ bar.getId }}" class="portfolio-link" data-toggle="modal">
-                            <button type="submit" class="page-scroll btn btn-xl"><h4>Menu Items</h4></button>
-                        </a>
-                        <div class="col-xs-3">
-                            {% if show_menu == true %}
+
+                <div class="border-solid">
+                    <a href="/show_bar_tokens/{{bar.getId}}"><h1>Unredeemed Tokens</h1></a>
+                    {% if get_tokens == true %}
+                        {% for token in tokens %}
+                            <ul>
+                                <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }} </li></a>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="border-solid">
+                    <a href='/show_menu_items/{{ bar.getId }}'><h1>Menu Items</h1></a>
+                    {% if show_menu == true %}
                         {% for item in items %}
                             <ul>
                                 <li>
@@ -114,42 +104,34 @@
                                 </li>
                             </ul>
                         {% endfor %}
-                        <form action="/add_item/{{ bar.getId }}" method="post">
-                            <label for="description">Item</label>
-                            <input id="description" name="description" type='text'>
-                            <label for="cost">Cost $</label>
-                            <input id="cost" name="cost"></input>
-                            <button type="submit">Add Item</button
-                        </form>
-                {% endif %}
-                        </div>
-                        </div>
-                    </div>
-                        <div class="row">
-                        <div class="col-md-4 col-sm-6 portfolio-item">
-                            <a href="/show_bar_edit/{{ bar.getId }}" class="portfolio-link" data-toggle="modal">
-                                <button type="submit" class="page-scroll btn btn-xl"><h4>Edit Profile</h4></button>
-                        </div>
-                        </a>
-                        <div class="col-xs-3">
-                            {% if edit_bar == true %}
-                <form action="/edit_bar/{{ bar.getId }}" method="post">
-                    <input name="_method" type="hidden" value="patch">
-                    <label for="name">Name</label>
-                    <input id="name" name="name" type="text" value= "{{ bar.getName }}" required>
-                    <label for="phone">Phone</label>
-                    <input id="phone" name="phone" type="text" value= "{{ bar.getPhone }}" required>
-                    <label for="address">Address</label>
-                    <input id="address" name="address" type="text" value= "{{ bar.getAddress }}" required>
-                    <label for="website">Website</label>
-                    <input id="website" name="website" type="text" value= "{{ bar.getWebsite }}" required>
-                    <button type="submit">Update</button>
+                <form action="/add_item/{{ bar.getId }}" method="post">
+                    <label for="description">Item</label>
+                        <input id="description" name="description" type='text'>
+                    <label for="cost">Cost $</label>
+                        <input id="cost" name="cost"></input>
+                    <button type="submit">Add Item</button
                 </form>
-            {% endif %}
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
-            </div>
+
+                <div class="border-solid">
+                    <a href='/show_bar_edit/{{ bar.getId }}'><h1>Edit Profile</h1></a>
+                    {% if edit_bar == true %}
+                        <form action="/edit_bar/{{ bar.getId }}" method="post">
+                            <input name="_method" type="hidden" value="patch">
+                                <label for="name">Name</label>
+                            <input id="name" name="name" type="text" value= "{{ bar.getName }}" required>
+                                <label for="phone">Phone</label>
+                            <input id="phone" name="phone" type="text" value= "{{ bar.getPhone }}" required>
+                                <label for="address">Address</label>
+                            <input id="address" name="address" type="text" value= "{{ bar.getAddress }}" required>
+                                <label for="website">Website</label>
+                            <input id="website" name="website" type="text" value= "{{ bar.getWebsite }}" required>
+                            <button type="submit">Update</button>
+                        </form>
+                    {% endif %}
+                </div>
+
         </section>
 
     <!-- jQuery -->
