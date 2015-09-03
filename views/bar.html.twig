@@ -54,48 +54,85 @@
     </nav>
 
     <body>
-        <h1>Welcome, {{ bar.getName }}</h1>
 
-        <a href="/show_bar_tokens/{{ bar.getId }}"><h1>Tokens</h1></a>
-            {% if get_tokens == true %}
-                {% for token in tokens | sort %}
-                    <ul>
-                        <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }}</li></a>
-                    </ul>
-                {% endfor %}
-            {% endif %}
+        <header class="bar-header">
+            <div class="container">
+                <div class="intro-text">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+        </header>
 
-        <a href="/show_menu_items/{{ bar.getId }}"><h1>Menu Items</h1></a>
-            {% if show_menu == true %}
-                    {% for item in items %}
-                        <ul>
-                            <li>
-                                <form action="/edit_item/{{ bar.getId }}/{{ item.getId }}" method="post">
-                                    <input name="_method" type="hidden" value="patch">
-                                    <label for="description">Item</label>
-                                    <input id="description" name="description" value= "{{ item.getDescription }}" required>
-                                    <label for="cost">Cost $</label>
-                                    <input id="cost" name="cost" value= {{ item.getCost}}></input>
-                                    <button type="submit">Update</button>
-                                </form>
-                                <form action='/delete_item/{{ bar.getId }}/{{ item.getId }}'>
-                                    <input name='_method' type='hidden' value='delete'>
-                                    <button type='submit'>Delete</button>
-                                </form>
-                            </li>
-                        </ul>
-                    {% endfor %}
-                    <form action="/add_item/{{ bar.getId }}" method="post">
-                        <label for="description">Item</label>
-                        <input id="description" name="description" type='text'>
-                        <label for="cost">Cost $</label>
-                        <input id="cost" name="cost"></input>
-                        <button type="submit">Add Item</button
-                    </form>
-            {% endif %}
-
-        <a href="/show_bar_edit/{{ bar.getId }}"><h1>Edit Profile</h1></a>
-            {% if edit_bar == true %}
+        <!-- Portfolio Grid Section -->
+        <section id="portfolio">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <a href="/login?username={{ bar.getName }}"><h2 class="section-heading">{{ bar.getName }}</h2></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 portfolio-item">
+                        <a href="/show_bar_tokens/{{bar.getId}}" class="portfolio-link" data-toggle="modal">
+                        <!-- <div class="portfolio-caption"> -->
+                            <button type="submit" class="page-scroll btn btn-xl"><h4>Unredeemed<br> Tokens</h4></button></a>
+                        </div>
+                        <div class="col-xs-3">
+                            {% if get_tokens == true %}
+                                {% for token in tokens %}
+                                    <ul>
+                                        <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }} </li></a>
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        </a>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-4 col-sm-6 portfolio-item">
+                        <a href="/show_menu_items/{{ bar.getId }}" class="portfolio-link" data-toggle="modal">
+                            <button type="submit" class="page-scroll btn btn-xl"><h4>Menu Items</h4></button>
+                        </a>
+                        <div class="col-xs-3">
+                            {% if show_menu == true %}
+                        {% for item in items %}
+                            <ul>
+                                <li>
+                                    <form action="/edit_item/{{ bar.getId }}/{{ item.getId }}" method="post">
+                                        <input name="_method" type="hidden" value="patch">
+                                        <label for="description">Item</label>
+                                        <input id="description" name="description" value= "{{ item.getDescription }}" required>
+                                        <label for="cost">Cost $</label>
+                                        <input id="cost" name="cost" value= {{ item.getCost}}></input>
+                                        <button type="submit" class="page-scroll btn btn-xl">Update</button>
+                                    </form>
+                                    <form action='/delete_item/{{ bar.getId }}/{{ item.getId }}'>
+                                        <input name='_method' type='hidden' value='delete'>
+                                        <button type='submit'>Delete</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        {% endfor %}
+                        <form action="/add_item/{{ bar.getId }}" method="post">
+                            <label for="description">Item</label>
+                            <input id="description" name="description" type='text'>
+                            <label for="cost">Cost $</label>
+                            <input id="cost" name="cost"></input>
+                            <button type="submit">Add Item</button
+                        </form>
+                {% endif %}
+                        </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                        <div class="col-md-4 col-sm-6 portfolio-item">
+                            <a href="/show_bar_edit/{{ bar.getId }}" class="portfolio-link" data-toggle="modal">
+                                <button type="submit" class="page-scroll btn btn-xl"><h4>Edit Profile</h4></button>
+                        </div>
+                        </a>
+                        <div class="col-xs-3">
+                            {% if edit_bar == true %}
                 <form action="/edit_bar/{{ bar.getId }}" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <label for="name">Name</label>
@@ -109,6 +146,26 @@
                     <button type="submit">Update</button>
                 </form>
             {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/agency.js"></script>
 
     </body>
 </html>
