@@ -58,9 +58,9 @@
 
         <a href="/show_bar_tokens/{{ bar.getId }}"><h1>Tokens</h1></a>
             {% if get_tokens == true %}
-                {% for token in tokens %}
+                {% for token in tokens | sort %}
                     <ul>
-                        <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }} </li></a>
+                        <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }}</li></a>
                     </ul>
                 {% endfor %}
             {% endif %}
