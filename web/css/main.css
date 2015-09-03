@@ -280,6 +280,21 @@ fieldset[disabled] .btn-xl.active {
     }
 }
 
+header {
+    text-align: center;
+    color: #fff;
+    background-attachment: scroll;
+    background-image:
+        linear-gradient(0deg, #000000, transparent 20%),
+        url(/img/bar_photo.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
 header.bar-header {
     text-align: center;
     color: #fff;
@@ -295,13 +310,13 @@ header.bar-header {
     -o-background-size: cover;
 }
 
-header {
+header.patron-header {
     text-align: center;
     color: #fff;
     background-attachment: scroll;
     background-image:
-        linear-gradient(0deg, #000000, transparent 20%),
-        url(/img/bar_photo.jpg);
+        linear-gradient(0deg, #000000, transparent 90%),
+        url(/img/patron-header.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     -webkit-background-size: cover;
