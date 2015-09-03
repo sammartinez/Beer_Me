@@ -11,7 +11,7 @@
     $app = New Silex\Application();
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost:8889;dbname=beer';
+    $server = 'mysql:host=localhost;dbname=beer';
     $username = 'root';
     $password = 'root';
 
@@ -72,7 +72,7 @@
                 'items' => $bar->getAllItems(),
                 'get_tokens' => false,
                 'show_menu' => false,
-                'edit_bar' => false
+                'edit_bar' => falsecd
             ));
         }
 
