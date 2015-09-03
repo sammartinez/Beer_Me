@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>{{ friend.getName }}</title>
+    </head>
+    <body>
+        <h1>Send {{ friend.getName }} a beer!</h1>
+
+        <form action='/select_bar/{{ user.getId }}/{{ friend.getId }}' method='post'>
+            <label for='select_bar'>{{ friend.getName }}'s favorite bars:</label>
+            <select id='select_bar' name='select_bar'>
+                {% for bar in friend_bars %}
+                    {% if selected_bar == bar %}
+                        <option selected="selected" value='{{ bar.getId }}'>{{ bar.getName }}</option>
+                    {% else %}
+                        <option value='{{ bar.getId }}'>{{ bar.getName }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <button type='submit'>Select bar</button>
+        </form>
+
+        {% if selected_bar is not empty %}
+            <form action='/add_token/{{ user.getId }}/{{ friend.getId }}/{{ selected_bar.getId }}' method='post'>
+                <label for='item_id'>Here are your drink options for {{ selected_bar.getName }}:</label>
+                <select id='item_id' name='item_id'>
+                    {% for item in selected_bar.getAllItems %}
+                        <option value = '{{ item.getId }}'>{{ item.getDescription }} - {{ item.getCost }}</option>
+                    {% endfor%}
+                </select>
+                <button type='submit'>Send beer token</button>
+            </form>
+        {% endif %}
+
+{#      Shopping cart for multiple tokens before purchase.  Non-functional
+        {% if selected_bar is not empty %}
+        <form action='/add_token/{{ user.getId }}/{{ friend.getId }}/{{ selected_bar.getId }}' method='post'>
+            <input name='shopping_cart' type='hidden' value= {{ shopping_cart }}>
+            <input name='displayed_cart' type='hidden' value= {{ displayed_cart }}>
+            <label for='item_id'>Here are your drink options for {{ selected_bar.getName }}:</label>
+            <select id='item_id' name='item_id'>
+                {% for item in selected_bar.getAllItems %}
+                    <option value = '{{ item.getId }}'>{{ item.getDescription }} - {{ item.getCost }}</option>
+                {% endfor%}
+            </select>
+            <button type='submit'>Select item</button>
+        </form>
+        {% endif %}
+
+        {% if displayed_cart is not empty %}
+            <ul>
+                {% set total = 0 %}
+                {% for item in displayed_cart %}
+                    <li>{{ item.getDescription }}: ${{ item.getCost }}</li>
+                    {% set total = total + item.getCost %}
+                {% endfor %}
+            </ul>
+            <p>Total: {{ total }}</p>
+
+            <form action='submit_token/{{ user.getId }}/{{ friend.getId }}' method='post'>
+                <input name='shopping_cart' type='hidden' value='{{ shopping_cart }}'>
+                <button type='submit'>Beer {{ friend.getName }}!</button>
+            </form>
+        {% endif %}
+#}
+    </body>
+</html>

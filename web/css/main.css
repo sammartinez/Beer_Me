@@ -17,12 +17,10 @@ body {
     text-shadow: -5px 2px 25px #444344;
 }
 
-    .layout {
-    text-align:left;
-    padding: 15px;
-    margin: 60px;
-
-
+.layout {
+text-align:left;
+padding: 15px;
+margin: 60px;
 }
 
 .text-muted {
