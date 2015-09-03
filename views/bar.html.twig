@@ -22,17 +22,21 @@
                                 <form action="/edit_item/{{ bar.getId }}/{{ item.getId }}" method="post">
                                     <input name="_method" type="hidden" value="patch">
                                     <label for="description">Item</label>
-                                    <input id="description" name="description" value= {{ item.getDescription }} required>
+                                    <input id="description" name="description" value= "{{ item.getDescription }}" required>
                                     <label for="cost">Cost $</label>
                                     <input id="cost" name="cost" value= {{ item.getCost}}></input>
                                     <button type="submit">Update</button>
+                                </form>
+                                <form action='/delete_item/{{ bar.getId }}/{{ item.getId }}'>
+                                    <input name='_method' type='hidden' value='delete'>
+                                    <button type='submit'>Delete</button>
                                 </form>
                             </li>
                         </ul>
                     {% endfor %}
                     <form action="/add_item/{{ bar.getId }}" method="post">
                         <label for="description">Item</label>
-                        <input id="description" name="description">
+                        <input id="description" name="description" type='text'>
                         <label for="cost">Cost $</label>
                         <input id="cost" name="cost"></input>
                         <button type="submit">Add Item</button
@@ -44,13 +48,13 @@
                 <form action="/edit_bar/{{ bar.getId }}" method="post">
                     <input name="_method" type="hidden" value="patch">
                     <label for="name">Name</label>
-                    <input id="name" name="name" type="text" value= {{ bar.getName }} required>
+                    <input id="name" name="name" type="text" value= "{{ bar.getName }}" required>
                     <label for="phone">Phone</label>
-                    <input id="phone" name="phone" type="text" value= {{ bar.getPhone }} required>
+                    <input id="phone" name="phone" type="text" value= "{{ bar.getPhone }}" required>
                     <label for="address">Address</label>
-                    <input id="address" name="address" type="text" value= {{ bar.getAddress }} required>
+                    <input id="address" name="address" type="text" value= "{{ bar.getAddress }}" required>
                     <label for="website">Website</label>
-                    <input id="website" name="website" type="text" value= {{ bar.getWebsite }} required>
+                    <input id="website" name="website" type="text" value= "{{ bar.getWebsite }}" required>
                     <button type="submit">Update</button>
                 </form>
             {% endif %}

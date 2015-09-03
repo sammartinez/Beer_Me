@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>{{ token.getPatronName }}'s Token</title>
+    </head>
+    <body>
+        <h1>{{ token.getPatronName }}'s Token</h1>
+
+        <p>This token is good for one {{ item.getDescription }} worth ${{ item.getCost }}.</p>
+
+        <form action='/redeem_token/{{ token.getId }}'>
+            <input name='_method' type='hidden' value='delete'>
+            <button type='submit'>Redeem Token</button>
+        </form>
+    </body>
+</html>
