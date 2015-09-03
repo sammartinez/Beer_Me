@@ -76,7 +76,7 @@
                 <a href='/show_email_search/{{ user.getId }}'><h1>Buy a beer</h1></a>
                 {# Search for Friend by email: #}
                     {% if send_token == true %}
-<<<<<<< HEAD
+
                     <h2>Find a friend:</h2>
 
                         <form action='/find_friend/{{ user.getId }}'>
@@ -84,14 +84,7 @@
                             <input id='search_email' name='search_email' type='text' placeholder='buddy@email.com' required>
                             <button type='submit' class='btn btn-default btn-xs'>Search</button>
                         </form>
-=======
-                        <h2>Find a friend:</h2>
-                            <form action='/find_friend/{{ user.getId }}'>
-                                <label for='search_email'>Your friend's email</label>
-                                <input id='search_email' name='search_email' type='text' placeholder='buddy@email.com' required>
-                                <button type='submit' class='btn btn-default'>Search</button>
-                            </form>
->>>>>>> d53e32e6db2c3441657c23cf90a676948ee46372
+
                     {% endif %}
             </div>
 
