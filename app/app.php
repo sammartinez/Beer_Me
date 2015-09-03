@@ -82,12 +82,12 @@
                 'get_tokens' => false,
                 'show_menu' => false,
                 'edit_bar' => false
-            ));
-        }
-
+                ));
+            }
     });
 
     //Get Show email search
+
     $app->get("/show_email_search/{id}", function($id) use($app) {
         $user = Patron::find($id);
         $all_bars = Bar::getAll();
@@ -166,11 +166,55 @@
         ));
     });
 
+
+    $app->get('/token/{token_id}', function($token_id) use ($app) {
+        $token = Token::find($token_id);
+        $menu_item = $token->getMenuItem();
+        $item_id = $menu_item[1];
+        $item = Item::find($item_id);
+        $bar_id = $menu_item[0];
+        $bar = Bar::find($bar_id);
+        return $app['twig']->render('redeem_token.html.twig', array(
+            'token' => $token,
+            'item' => $item,
+            'bar' => $bar
+        ));
+    });
+
+    $app->delete('/redeem_token/{token_id}', function($token_id) use ($app) {
+        $token = Token::find($token_id);
+        $token->delete();
+        return $app['twig']->render("bar.html.twig", array(
+            'bar' => $bar,
+            'tokens' => $bar->getAllTokens(),
+            'items' => $bar->getAllItems(),
+            'get_tokens' => false,
+            'show_menu' => false,
+            'edit_bar' => false
+        ));
+    });
+
+    $app->get('/redeem_token/{token_id}', function($token_id) use ($app) {
+        $token = Token::find($token_id);
+        $menu_item = $token->getMenuItem();
+        $bar_id = $menu_item[0];
+        $bar = Bar::find($bar_id);
+        return $app['twig']->render("bar.html.twig", array(
+            'bar' => $bar,
+            'tokens' => $bar->getAllTokens(),
+            'items' => $bar->getAllItems(),
+            'get_tokens' => false,
+            'show_menu' => false,
+            'edit_bar' => false
+        ));
+    });
+
+
     //Get Show Menu Items
+
     $app->get("/show_menu_items/{id}", function($id) use($app) {
         $bar = Bar::find($id);
         $items = $bar->getAllItems();
-
         return $app['twig']->render("bar.html.twig", array(
         'bar' => $bar,
         'tokens' => $bar->getAllTokens(),
@@ -181,7 +225,70 @@
         ));
     });
 
+
+    $app->patch("/edit_item/{bar_id}/{item_id}", function($bar_id, $item_id) use($app) {
+        $item = Item::find($item_id);
+        $item->update($_POST['description'], $_POST['cost']);
+        $bar = Bar::find($bar_id);
+        return $app['twig']->render("bar.html.twig", array(
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => false,
+        'show_menu' => true,
+        'edit_bar' => false
+        ));
+    });
+
+    $app->post("/add_item/{bar_id}", function($bar_id) use($app) {
+        $bar = Bar::find($bar_id);
+        $item = new Item($_POST['description'], $_POST['cost']);
+        $item->save();
+        $bar->addItem($item);
+        return $app['twig']->render("bar.html.twig", array(
+        'item' => $item,
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => false,
+        'show_menu' => true,
+        'edit_bar' => false
+        ));
+    });
+
+    $app->delete('/delete_item/{bar_id}/{item_id}', function($bar_id, $item_id) use ($app) {
+        $bar = Bar::find($bar_id);
+        $item = Item::find($item_id);
+        $item->delete();
+        return $app['twig']->render("bar.html.twig", array(
+        'item' => $item,
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => false,
+        'show_menu' => true,
+        'edit_bar' => false
+        ));
+    });
+
+    $app->get('/delete_item/{bar_id}/{item_id}', function($bar_id, $item_id) use ($app) {
+        $bar = Bar::find($bar_id);
+        $item = Item::find($item_id);
+        $item->delete();
+        return $app['twig']->render("bar.html.twig", array(
+        'item' => $item,
+        'bar' => $bar,
+        'tokens' => $bar->getAllTokens(),
+        'items' => $bar->getAllItems(),
+        'get_tokens' => false,
+        'show_menu' => true,
+        'edit_bar' => false
+        ));
+    });
+
+
     //Get Show Bar Edit
+
     $app->get("/show_bar_edit/{id}", function($id) use($app) {
         $bar = Bar::find($id);
 
