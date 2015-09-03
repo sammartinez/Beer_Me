@@ -170,9 +170,12 @@
         $menu_item = $token->getMenuItem();
         $item_id = $menu_item[1];
         $item = Item::find($item_id);
+        $bar_id = $menu_item[0];
+        $bar = Bar::find($bar_id);
         return $app['twig']->render('redeem_token.html.twig', array(
             'token' => $token,
-            'item' => $item
+            'item' => $item,
+            'bar' => $bar
         ));
     });
 
@@ -193,7 +196,6 @@
         $token = Token::find($token_id);
         $menu_item = $token->getMenuItem();
         $bar_id = $menu_item[0];
-        $token->delete();
         $bar = Bar::find($bar_id);
         return $app['twig']->render("bar.html.twig", array(
             'bar' => $bar,
