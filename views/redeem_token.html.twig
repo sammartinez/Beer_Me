@@ -1,8 +1,32 @@
 <html>
     <head>
-        <title>{{ token.getPatronName }}'s Token</title>
+        <!-- Bootstrap Core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="/css/main.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+        <title>Beer Me</title>
     </head>
     <body>
+        <header class="bar-header">
+            <div class="container">
+                <div class="intro-text">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="container">
+
         <h1>{{ token.getPatronName }}'s Token</h1>
 
         <p>This token is good for one {{ item.getDescription }} worth ${{ item.getCost }}.</p>
@@ -13,5 +37,6 @@
         </form>
 
         <a href='/show_bar_tokens/{{bar.getId}}'>Home</a>
+    </div>
     </body>
 </html>

@@ -373,7 +373,8 @@
                 'friend_bars' => $friend->getPreferredBars(),
                 'selected_bar' => $selected_bar,
                 'shopping_cart' => $shopping_cart,
-                'displayed_cart' => $displayed_cart
+                'displayed_cart' => $displayed_cart,
+                'search_email' => $friend_username
         ));
         } else {
             return $app['twig']->render("patron.html.twig", array(

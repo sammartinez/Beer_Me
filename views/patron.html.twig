@@ -74,31 +74,30 @@
 
             <div class="border-solid">
                 <a href='/show_email_search/{{ user.getId }}'><h1>Buy a beer</h1></a>
-{# Search for Friend by email: #}
+                {# Search for Friend by email: #}
                     {% if send_token == true %}
-                    <h2>Find a friend:</h2>
-
-                        <form action='/find_friend/{{ user.getId }}'>
-                            <label for='search_email'>Your friend's email</label>
-                            <input id='search_email' name='search_email' type='text' placeholder='buddy@email.com' required>
-                            <button type='submit' class='btn btn-default'>Search</button>
-                        </form>
+                        <h2>Find a friend:</h2>
+                            <form action='/find_friend/{{ user.getId }}'>
+                                <label for='search_email'>Your friend's email</label>
+                                <input id='search_email' name='search_email' type='text' placeholder='buddy@email.com' required>
+                                <button type='submit' class='btn btn-default'>Search</button>
+                            </form>
                     {% endif %}
             </div>
 
             <div class="border-solid">
-            <a href='/show_user_tokens/{{ user.getId }}'><h1>My tokens</h1></a>
+                <a href='/show_user_tokens/{{ user.getId }}'><h1>My tokens</h1></a>
                 {% if token_form == true %}
                     {% if user_tokens is not empty %}
                     <ul>
-                        {% for token in user_tokens %}
-                                    <li>
-                                        <a href="/view_token/{{ token.getId }}">{{ token.getBarName }}</a>
-                                    </li>
+                        {% for token in user_tokens | sort %}
+                            <li>
+                                <a href="/view_token/{{ token.getId }}">{{ token.getBarName }}</a>
+                            </li>
                         {% endfor %}
                     </ul>
                     {% else %}
-                    <p>You don't have any tokens yet! Apparently, you don't have any cool friends either.</p>
+                        <p>You don't have any tokens yet! Apparently, you don't have any cool friends either.</p>
                     {% endif %}
                 {% endif %}
             </div>
