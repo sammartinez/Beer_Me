@@ -80,7 +80,7 @@
                 {% if token_form == true %}
                     {% if user_tokens is not empty %}
                     <ul>
-                        {% for token in user_tokens %}
+                        {% for token in user_tokens | sort %}
                                     <li>
                                         <a href="/view_token/{{ token.getId }}">{{ token.getBarName }}</a>
                                     </li>
