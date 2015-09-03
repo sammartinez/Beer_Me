@@ -26,27 +26,34 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
-    //Get Calls
+    //Get Calls ==================================================
         $app->get("/", function() use($app) {
+
             return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => false));
         });
 
         $app->get("/signup", function() use($app) {
+
             return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false));
         });
 
         $app->get("/signin", function() use($app) {
+
             return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => true, 'team' => false));
         });
 
         $app->get("/about", function() use($app) {
+
             return $app['twig']->render("index.html.twig", array('about' => true, 'sign_up' => false, "sign_in" => false, 'team' => false));
         });
 
         $app->get("/team", function() use($app) {
+
             return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => false, "sign_in" => false, 'team' => true));
         });
 
+
+    //Get Login Call
     $app->get("/login", function() use($app) {
         $username = $_GET['username'];
         $user = Patron::search($username);
@@ -55,6 +62,7 @@
         $bar = Bar::search($username);
 
         if($bar == NULL) {
+
             return $app['twig']->render("patron.html.twig", array(
                 'user' => $user,
                 'user_tokens' => $user->getTokens(),
@@ -66,6 +74,7 @@
             ));
 
             } else {
+
             return $app['twig']->render("bar.html.twig", array(
                 'bar' => $bar,
                 'tokens' => $bar->getAllTokens(),
@@ -78,9 +87,11 @@
 
     });
 
+    //Get Show email search
     $app->get("/show_email_search/{id}", function($id) use($app) {
         $user = Patron::find($id);
         $all_bars = Bar::getAll();
+
         return $app['twig']->render("patron.html.twig", array(
             'user' => $user,
             'user_tokens' =>$user->getTokens(),
@@ -92,9 +103,11 @@
             ));
     });
 
+    //Get Show User Tokens
     $app->get("/show_user_tokens/{id}", function($id) use($app) {
         $user = Patron::find($id);
         $all_bars = Bar::getAll();
+
         return $app['twig']->render("patron.html.twig", array(
             'user' => $user,
             'user_tokens' =>$user->getTokens(),
@@ -106,9 +119,11 @@
             ));
     });
 
+    //Get Show User edit
     $app->get("/show_user_edit/{id}", function($id) use($app) {
         $user = Patron::find($id);
         $all_bars = Bar::getAll();
+
         return $app['twig']->render("patron.html.twig", array(
             'user' => $user,
             'user_tokens' =>$user->getTokens(),
@@ -120,26 +135,11 @@
             ));
     });
 
-    $app->patch("/edit_user/{id}", function($id) use($app) {
-        $user = Patron::find($id);
-        $all_bars = Bar::getAll();
-        $new_name = $_POST['name'];
-        $new_email = $_POST['email'];
-        $user->updatePatron($new_name, $new_email);
-        return $app['twig']->render("patron.html.twig", array(
-            'user' => $user,
-            'user_tokens' =>$user->getTokens(),
-            'all_bars' => $all_bars,
-            'preferred_bars' => false,
-            'send_token' => false,
-            'token_form' => false,
-            'edit_user' => false
-            ));
-    });
-
+    //Get Show preferred bars
     $app->get("/show_preferred_bars/{id}", function($id) use($app) {
         $user = Patron::find($id);
         $all_bars = Bar::getAll();
+
         return $app['twig']->render("patron.html.twig", array(
             'user' => $user,
             'user_tokens' =>$user->getTokens(),
@@ -151,10 +151,11 @@
             ));
     });
 
-    /* Routes for Bar Page */
+    //Get Show Bar Tokens
     $app->get("/show_bar_tokens/{id}", function($id) use($app) {
         $bar = Bar::find($id);
         $tokens = $bar->getAllTokens();
+
         return $app['twig']->render("bar.html.twig", array(
         'bar' => $bar,
         'tokens' => $bar->getAllTokens(),
@@ -165,9 +166,11 @@
         ));
     });
 
+    //Get Show Menu Items
     $app->get("/show_menu_items/{id}", function($id) use($app) {
         $bar = Bar::find($id);
         $items = $bar->getAllItems();
+
         return $app['twig']->render("bar.html.twig", array(
         'bar' => $bar,
         'tokens' => $bar->getAllTokens(),
@@ -178,8 +181,10 @@
         ));
     });
 
+    //Get Show Bar Edit
     $app->get("/show_bar_edit/{id}", function($id) use($app) {
         $bar = Bar::find($id);
+
         return $app['twig']->render("bar.html.twig", array(
             'bar' => $bar,
             'tokens' => $bar->getAllTokens(),
@@ -190,23 +195,7 @@
         ));
     });
 
-    $app->patch("/edit_bar/{id}", function($id) use($app) {
-        $bar = Bar::find($id);
-        $new_name = $_POST['name'];
-        $new_phone = $_POST['phone'];
-        $new_address = $_POST['address'];
-        $new_website = $_POST['website'];
-        $bar->update($new_name, $new_phone, $new_address, $new_website);
-        return $app['twig']->render("bar.html.twig", array(
-            'bar' => $bar,
-            'tokens' => $bar->getAllTokens(),
-            'items' => $bar->getAllItems(),
-            'get_tokens' => false,
-            'show_menu' => false,
-            'edit_bar' => true
-        ));
-    });
-
+    //Get Email Send
     $app->get("/email_send", function() use($app) {
         $mail = new PHPMailer();
         // $mail->SMTPDebug = 3;
@@ -239,39 +228,7 @@
         return $app['twig']->render("email.html.twig", array('message' => $message));
     });
 
-    $app->post("/add_preferred_bar/{id}", function($id) use($app) {
-        $user = Patron::find($id);
-        $all_bars = Bar::getAll();
-        $bar = Bar::find($_POST['add_bar']);
-        $user->addPreferredBar($bar);
-        return $app['twig']->render("patron.html.twig", array(
-            'user' => $user,
-            'user_tokens' =>$user->getTokens(),
-            'all_bars' => $all_bars,
-            'preferred_bars' => true,
-            'send_token' => false,
-            'token_form' => false,
-            'edit_user' => false
-            ));
-    });
-
-    $app->delete("/delete_preferred_bar/{id}", function($id) use($app) {
-        $user = Patron::find($id);
-        $all_bars = Bar::getAll();
-        $bar = $_POST['bar'];
-        $found_bar = Bar::find($bar);
-        $user->deleteBar($found_bar);
-        return $app['twig']->render("patron.html.twig", array(
-            'user' => $user,
-            'user_tokens' =>$user->getTokens(),
-            'all_bars' => $all_bars,
-            'preferred_bars' => true,
-            'send_token' => false,
-            'token_form' => false,
-            'edit_user' => false
-            ));
-    });
-
+    //Get find_friend {id}
     $app->get("/find_friend/{id}", function($id) use($app) {
         $user = Patron::find($id);
         $friend_username = $_GET['search_email'];
@@ -280,6 +237,7 @@
         $selected_bar = [];
         $shopping_cart = null;
         $displayed_cart = null;
+
         return $app['twig']->render("send_token.html.twig", array(
             'user' => $user,
             'friend' => $friend,
@@ -290,6 +248,7 @@
         ));
     });
 
+    //Get Select Bar {id}
     $app->get("/select_bar/{id}/{friend_id}", function($id, $friend_id) use($app) {
         $user = Patron::find($id);
         $friend = Patron::find($friend_id);
@@ -297,6 +256,7 @@
         $selected_bar = [];
         $shopping_cart = null;
         $displayed_cart = null;
+
         return $app['twig']->render("send_token.html.twig", array(
             'user' => $user,
             'friend' => $friend,
@@ -307,6 +267,87 @@
         ));
     });
 
+
+    //Patch Calls =================================================
+
+    //Patch Edit User {id}
+    $app->patch("/edit_user/{id}", function($id) use($app) {
+        $user = Patron::find($id);
+        $all_bars = Bar::getAll();
+        $new_name = $_POST['name'];
+        $new_email = $_POST['email'];
+        $user->updatePatron($new_name, $new_email);
+
+        return $app['twig']->render("patron.html.twig", array(
+            'user' => $user,
+            'user_tokens' =>$user->getTokens(),
+            'all_bars' => $all_bars,
+            'preferred_bars' => false,
+            'send_token' => false,
+            'token_form' => false,
+            'edit_user' => false
+            ));
+    });
+
+    //Patch Edit Bar {id}
+    $app->patch("/edit_bar/{id}", function($id) use($app) {
+        $bar = Bar::find($id);
+        $new_name = $_POST['name'];
+        $new_phone = $_POST['phone'];
+        $new_address = $_POST['address'];
+        $new_website = $_POST['website'];
+        $bar->update($new_name, $new_phone, $new_address, $new_website);
+
+        return $app['twig']->render("bar.html.twig", array(
+            'bar' => $bar,
+            'tokens' => $bar->getAllTokens(),
+            'items' => $bar->getAllItems(),
+            'get_tokens' => false,
+            'show_menu' => false,
+            'edit_bar' => true
+        ));
+    });
+
+    //Delete Calls ==================================================
+    $app->delete("/delete_preferred_bar/{id}", function($id) use($app) {
+        $user = Patron::find($id);
+        $all_bars = Bar::getAll();
+        $bar = $_POST['bar'];
+        $found_bar = Bar::find($bar);
+        $user->deleteBar($found_bar);
+
+        return $app['twig']->render("patron.html.twig", array(
+            'user' => $user,
+            'user_tokens' =>$user->getTokens(),
+            'all_bars' => $all_bars,
+            'preferred_bars' => true,
+            'send_token' => false,
+            'token_form' => false,
+            'edit_user' => false
+            ));
+    });
+
+    //Post Calls ====================================================
+
+    //Post Add Preferred bar {id}
+    $app->post("/add_preferred_bar/{id}", function($id) use($app) {
+        $user = Patron::find($id);
+        $all_bars = Bar::getAll();
+        $bar = Bar::find($_POST['add_bar']);
+        $user->addPreferredBar($bar);
+
+        return $app['twig']->render("patron.html.twig", array(
+            'user' => $user,
+            'user_tokens' =>$user->getTokens(),
+            'all_bars' => $all_bars,
+            'preferred_bars' => true,
+            'send_token' => false,
+            'token_form' => false,
+            'edit_user' => false
+            ));
+    });
+
+    //Post Select Bar {id}/{friend_id}
     $app->post("/select_bar/{id}/{friend_id}", function($id, $friend_id) use($app) {
         $user = Patron::find($id);
         $friend = Patron::find($friend_id);
@@ -314,6 +355,7 @@
         $selected_bar = Bar::find($_POST['select_bar']);
         $shopping_cart = null;
         $displayed_cart = null;
+
         return $app['twig']->render("send_token.html.twig", array(
             'user' => $user,
             'friend' => $friend,
@@ -324,6 +366,7 @@
         ));
     });
 
+    //Post Add Token {id}/{friend_id}/{bar_id}
     $app->post("/add_token/{id}/{friend_id}/{bar_id}", function($id, $friend_id, $bar_id) use($app) {
         $user = Patron::find($id);
         $friend = Patron::find($friend_id);
@@ -334,6 +377,7 @@
         $menu_id = $selected_bar->getMenuId($item);
         $new_token = new Token($friend_id, $menu_id, $id);
         $new_token->save();
+
         return $app['twig']->render("token_confirmation.html.twig", array('user' => $user, 'friend' => $friend));
     });
 
@@ -387,6 +431,7 @@
     //     }
     //     return $app['twig']->render("token_confirmation.html.twig", array('user' => $user, 'friend' => $friend));
     // });
+
 
     return $app;
 ?>
