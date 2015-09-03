@@ -80,7 +80,7 @@
                         </div>
                         <div class="col-xs-3">
                             {% if get_tokens == true %}
-                                {% for token in tokens %}
+                                {% for token in tokens | sort %}
                                     <ul>
                                         <a href="/token/{{ token.getId }}"><li>{{ token.getPatronName }} </li></a>
                                     </ul>
