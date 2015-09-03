@@ -34,7 +34,7 @@
 
         $app->get("/signup", function() use($app) {
 
-            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false));
+            return $app['twig']->render("index.html.twig", array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false, 'customer_signup' => false, 'business_signup' => false));
         });
 
         $app->get("/signin", function() use($app) {
@@ -88,6 +88,36 @@
                 'edit_bar' => false
             ));}
 
+    });
+
+    //Sign Up Routes:
+
+    $app->get("/show_customer_signup", function() use($app) {
+        return $app['twig']->render('index.html.twig', array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false,
+            'customer_signup' => true,
+            'business_signup' => false
+        ));
+    });
+
+    $app->get("/show_business_signup", function() use($app) {
+        return $app['twig']->render('index.html.twig', array('about' => false, 'sign_up' => true, "sign_in" => false, 'team' => false,
+            'customer_signup' => false,
+            'business_signup' => true
+        ));
+    });
+
+    $app->post("/customer_signup", function() use($app) {
+        $new_user = new Patron($_POST['username'], $_POST['email']);
+        $new_user->save();
+
+        return $app['twig']->render("signup_confirmation.html.twig");
+    });
+
+    $app->post("/business_signup", function() use($app) {
+        $new_bar = new Bar($_POST['name'], $_POST['phone'], $_POST['address'], $_POST['website']);
+        $new_bar->save();
+
+        return $app['twig']->render("signup_confirmation.html.twig");
     });
 
     //Get Show email search
