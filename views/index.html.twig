@@ -83,10 +83,14 @@
                     </form>
                     </div>
                 </div>
+
                 <!-- Sign Up -->
                 {% elseif sign_up == true %}
-                    <h2 class="section-heading">Create a new account.</h2>
-                    <form action="/signup" method="post">
+
+
+                    <a href='/show_customer_signup'><h2>Create a customer account.</h2></a>
+                    {% if customer_signup == true %}
+                    <form action="/customer_signup" method="post">
                         <div class="col-xs-3">
                             <label for="username">Enter your username:</label>
                             <input class="form-control input-lg" placeholder="Username" id="username" name="username" type="text" required>
@@ -97,6 +101,27 @@
                         </div>
                         <button type="submit" class="page-scroll btn btn-xl">Sign Up</button>
                     </form>
+                    {% endif %}
+
+                    <a href='/show_business_signup'><h2>Create a business account.</h2></a>
+                    {% if business_signup == true %}
+                    <form action="/business_signup" method="post">
+
+                            <label for="name">Enter the business name:</label>
+                            <input class="form-control input-lg" placeholder="Business Name" id="name" name="name" type="text" required></br>
+
+                            <label for="phone">Enter a phone number:</label>
+                            <input class="form-control input-lg" placeholder="555-555-5555" id="phone" name="phone" type="text" required></br>
+
+                            <label for="address">Enter an address</label>
+                            <input class="form-control input-lg" placeholder="123 Street Ave." id="address" name="address" type="text" required></br>
+
+                            <label for="website">Enter the website</label>
+                            <input class="form-control input-lg" placeholder="www.yourbusiness.com" id="website" name="website" type="text" required></br>
+
+                        </br><button type="submit" class="page-scroll btn btn-xl">Sign Up</button>
+                    </form>
+                    {% endif %}
 
                 <!-- About -->
                 {% elseif about == true %}
@@ -333,6 +358,10 @@
             <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
             <script src="js/classie.js"></script>
             <script src="js/cbpAnimatedHeader.js"></script>
+
+            <!-- Contact Form JavaScript -->
+
+            <script src="js/contact_me.js"></script>
 
 
             <!-- Custom Theme JavaScript -->

@@ -63,7 +63,7 @@
 
             <div class="border-solid">
                 <a href='/show_email_search/{{ user.getId }}'><h1>Buy a beer</h1></a>
-
+{# Search for Friend by email: #}
                     {% if send_token == true %}
                     <h2>Find a friend:</h2>
 
@@ -81,11 +81,9 @@
                     {% if user_tokens is not empty %}
                     <ul>
                         {% for token in user_tokens %}
-                            {# <a href='/token'><p>Placeholder</p></a> This will route to a page with a confirmation code #}
-                            <li>Drink: {{ item.getDescription }}<br>
-                                Bar: {{ bar.getName }}<br>
-                                Sent by: {{ sender.getName }}
-                            </li>
+                                    <li>
+                                        <a href="/view_token/{{ token.getId }}">{{ token.getBarName }}</a>
+                                    </li>
                         {% endfor %}
                     </ul>
                     {% else %}
