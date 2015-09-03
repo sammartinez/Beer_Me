@@ -119,10 +119,15 @@
                 "SELECT name FROM
                     bars JOIN menus ON (bars.id = menus.bar_id)
                          JOIN tokens ON (tokens.menu_id = menus.id)
-                         WHERE menus.id = {$this->getMenuId()};");
+                         WHERE menus.id = {$this->getMenuId()} ORDER BY name;");
 
             $bar_name = $result->fetchColumn();
             return $bar_name;
+        }
+
+        function getBarId()
+        {
+
         }
     }
 

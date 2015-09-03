@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Beer Me</title>
+    </head>
+    <body>
+        <h1>Here is the token for {{ token.getBarName }}</h1>
+
+        <p>This token is good for one {{ item.getDescription }} worth ${{ item.getCost }}.</p>
+
+
+
+        <a href='/show_user_tokens/{{ token.getPatronId }}'>Back to Patron</a>
+    </body>
+</html>
