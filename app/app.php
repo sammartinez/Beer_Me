@@ -195,39 +195,6 @@
         ));
     });
 
-    //Get Email Send
-    $app->get("/email_send", function() use($app) {
-        $mail = new PHPMailer();
-        // $mail->SMTPDebug = 3;
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'beerme.token@gmail.com';
-        $mail->Password = 'b33rm3123';
-        $mail->STMPSecure = 'tls';
-        $mail->Port = 587;
-
-        $mail->From = 'beerme.token@gmail.com';
-        $mail->FromName = 'Beer Me!';
-        $mail->addAddress($_POST['email'], $_POST['name']);
-        $mail->addReplyTo('beerme.token@gmail.com', 'Beer Me!');
-        $mail->isHTML(true);
-
-        $mail->Subject = 'Somebody sent you a token!';
-        $mail->Body = 'HEY YOU GUYS!  LOOK WAT I DONE DID!!!!!!.';
-        $mail->AltBody = 'Received token.';
-
-        $email = $_POST['email'];
-        $name = $_POST['name'];
-        if(!$mail->send()) {
-            $message = 'Message could not be sent. <p>';
-        } else {
-            $message = 'Message has been sent.';
-        }
-
-        return $app['twig']->render("email.html.twig", array('message' => $message));
-    });
-
     //Get find_friend {id}
     $app->get("/find_friend/{id}", function($id) use($app) {
         $user = Patron::find($id);
@@ -398,11 +365,27 @@
         $mail->isHTML(true);
 
         $mail->Subject = 'Somebody sent you a token!';
-        $mail->Body = "<a href='http://localhost:8000/'>Click here to view your token.</a>";
+        $mail->Body = "<a href='http://localhost:8000/confirmation/$friend_id'>Click here to view your token.</a>";
         $mail->AltBody = 'You received a token!  Log in to your account to view your token.';
         $mail->send();
 
-        return $app['twig']->render("token_confirmation.html.twig", array('user' => $user, 'friend' => $friend, 'message' => $message));
+        return $app['twig']->render("token_confirmation.html.twig", array('user' => $user, 'friend' => $friend
+        ));
+    });
+
+    /* Route from email link back to patron page */
+    $app->get("/confirmation/{id}", function($id) use($app) {
+        $user = Patron::find($id);
+        $all_bars = Bar::getAll();
+        return $app['twig']->render("patron.html.twig", array(
+        'user' => $user,
+        'user_tokens' => $user->getTokens(),
+        'all_bars' => $all_bars,
+        'preferred_bars' => false,
+        'send_token' => false,
+        'token_form' => false,
+        'edit_user' => false
+    ));
     });
 
     // $app->post("/add_token/{id}/{friend_id}/{bar_id}", function($id, $friend_id, $bar_id) use($app) {
