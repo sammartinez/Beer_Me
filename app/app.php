@@ -199,6 +199,7 @@
         $menu_item = $token->getMenuItem();
         $bar_id = $menu_item[0];
         $bar = Bar::find($bar_id);
+        $token->delete();
         return $app['twig']->render("bar.html.twig", array(
             'bar' => $bar,
             'tokens' => $bar->getAllTokens(),
