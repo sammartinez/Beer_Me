@@ -81,9 +81,8 @@
                     {% if user_tokens is not empty %}
                     <ul>
                         {% for token in user_tokens %}
-                                    <li>{{ token.getBarName }}<br>
-                                        {# Bar: {{ bar.getName }}<br> #}
-                                        {# Sent by: {{ sender.getName }} #}
+                                    <li>
+                                        <a href="/view_token/{{ token.getId }}">{{ token.getBarName }}</a>
                                     </li>
                         {% endfor %}
                     </ul>

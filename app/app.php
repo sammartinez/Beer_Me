@@ -214,6 +214,25 @@
         ));
     });
 
+    //Get call to link to a bar with what the token is valid for
+    $app->get('/view_token/{token_id}', function($token_id) use ($app) {
+        $token = Token::find($token_id);
+        $menu_item = $token->getMenuItem();
+        $bar_id = $menu_item[0];
+        $bar = Bar::find($bar_id);
+
+        $item_id = $menu_item[1];
+        $item = Item::find($item_id);
+
+
+
+        return $app['twig']->render("view_token.html.twig", array(
+            'bar' => $bar,
+            'item' => $item,
+            'token' => $token
+        ));
+    });
+
 
     //Get Show Menu Items
 
