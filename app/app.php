@@ -378,7 +378,31 @@
         $new_token = new Token($friend_id, $menu_id, $id);
         $new_token->save();
 
-        return $app['twig']->render("token_confirmation.html.twig", array('user' => $user, 'friend' => $friend));
+        $mail = new PHPMailer();
+        // $mail->SMTPDebug = 3;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'beerme.token@gmail.com';
+        $mail->Password = 'b33rm3123';
+        $mail->STMPSecure = 'tls';
+        $mail->Port = 587;
+
+        $email_confirmation = $friend->getEmail();
+        $user_name = $friend->getName();
+
+        $mail->From = 'beerme.token@gmail.com';
+        $mail->FromName = 'Beer Me!';
+        $mail->addAddress($email_confirmation, $user_name);
+        $mail->addReplyTo('beerme.token@gmail.com', 'Beer Me!');
+        $mail->isHTML(true);
+
+        $mail->Subject = 'Somebody sent you a token!';
+        $mail->Body = "<a href='http://localhost:8000/'>Click here to view your token.</a>";
+        $mail->AltBody = 'You received a token!  Log in to your account to view your token.';
+        $mail->send();
+
+        return $app['twig']->render("token_confirmation.html.twig", array('user' => $user, 'friend' => $friend, 'message' => $message));
     });
 
     // $app->post("/add_token/{id}/{friend_id}/{bar_id}", function($id, $friend_id, $bar_id) use($app) {
