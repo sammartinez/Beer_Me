@@ -81,11 +81,10 @@
                     {% if user_tokens is not empty %}
                     <ul>
                         {% for token in user_tokens %}
-                            {# <a href='/token'><p>Placeholder</p></a> This will route to a page with a confirmation code #}
-                            <li>Drink: {{ item.getDescription }}<br>
-                                Bar: {{ bar.getName }}<br>
-                                Sent by: {{ sender.getName }}
-                            </li>
+                                    <li>{{ token.getBarName }}<br>
+                                        {# Bar: {{ bar.getName }}<br> #}
+                                        {# Sent by: {{ sender.getName }} #}
+                                    </li>
                         {% endfor %}
                     </ul>
                     {% else %}

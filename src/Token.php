@@ -112,6 +112,18 @@
             }
             return $patron_name;
         }
+
+        function getBarName()
+        {
+            $result = $GLOBALS['DB']->query(
+                "SELECT name FROM
+                    bars JOIN menus ON (bars.id = menus.bar_id)
+                         JOIN tokens ON (tokens.menu_id = menus.id)
+                         WHERE menus.id = {$this->getMenuId()};");
+
+            $bar_name = $result->fetchColumn();
+            return $bar_name;
+        }
     }
 
  ?>
