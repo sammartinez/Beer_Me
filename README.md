@@ -16,7 +16,7 @@ If you're looking to test this app yourself (these directions assume you are wor
 
 1. Clone repository from GitHub.
 
-2. Run $ composer install in top level of project folder.
+2. Run ```composer install``` in top level of project folder.
 
 3. in a new terminal tab. enter ```mysql.server start```.
 
