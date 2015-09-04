@@ -1,18 +1,18 @@
 # Beer_Me
 
-##### _{It's about time you buy your friend a beer}, {September 3rd, 2015}_
+##### It's about time you buy your friend a beer, September 3rd, 2015
 
-#### By _**{Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez}**_
+#### By _**Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez**_
 
 ## Description
 
-_{Beer Me offers the ability to remotely buy a friend a drink. After siging up, a free and quick process, you can sign in using your email address. From your profile page you can buy a drink for a friend (don't worry we will notify them via email), check on the number of drink tokens you have (as well as their value), edit or change your profile information, and add your favorite bars. 
+Beer Me offers the ability to remotely buy a friend a drink. After siging up, a free and quick process, you can sign in using your email address. From your profile page you can buy a drink for a friend (don't worry we will notify them via email), check on the number of drink tokens you have (as well as their value), edit or change your profile information, and add your favorite bars.
 
-  Do you want to be a participating bar? No problem! After siging up, you can login to view a profile suited to your needs. We offer the ability to add menu items of your choice to be redeemed with tokens. When you are ready to redeem a customer's token simply click on the "Unredeemed Tokens" link in your profile; from the new page you will see the value of the token as well as an option to the redeem the token. Your profile also has a link to update your business information at your convience.}_
+  Do you want to be a participating bar? No problem! After siging up, you can login to view a profile suited to your needs. We offer the ability to add menu items of your choice to be redeemed with tokens. When you are ready to redeem a customer's token simply click on the "Unredeemed Tokens" link in your profile; from the new page you will see the value of the token as well as an option to the redeem the token. Your profile also has a link to update your business information at your convenience.
 
 ## Setup
 
-If you're looking to test this app yourself (these directions assume you are working from a mac): 
+If you're looking to test this app yourself (these directions assume you are working from a mac):
 
 1. Clone repository from GitHub.
 
@@ -36,18 +36,18 @@ If you're looking to test this app yourself (these directions assume you are wor
 
 ## Technologies Used
 
-* HTML 
+* HTML
 * CSS
 * PHP
-* PHPUnit 
-* JavaScript 
+* PHPUnit
+* JavaScript
 * JQuery
-* Silex 
-* Twig 
+* Silex
+* Twig
 
 ### Legal
 
-Copyright (c) 2015 **_{Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez}_**
+Copyright (c) 2015 **_Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez_**
 
 This software is licensed under the MIT license.
 
