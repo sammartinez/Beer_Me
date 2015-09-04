@@ -541,7 +541,7 @@
         $mail->Subject = 'Somebody sent you a token!';
         $mail->Body = "<a href='http://localhost:8000/confirmation/$friend_id'>Click here to view your token.</a>";
         $mail->AltBody = 'You received a token!  Log in to your account to view your token.';
-        // $mail->send();
+        $mail->send();
 
         return $app['twig']->render("token_confirmation.html.twig", array('user' => $user, 'friend' => $friend
         ));
