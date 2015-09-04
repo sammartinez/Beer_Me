@@ -47,7 +47,7 @@ If you're looking to test this app yourself (these directions assume you are wor
 
 ### Legal
 
-Copyright (c) 2015 **_{Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez}_**
+Copyright (c) 2015 **_Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez_**
 
 This software is licensed under the MIT license.
 
