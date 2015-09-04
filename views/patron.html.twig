@@ -94,9 +94,9 @@
                     {% if user_tokens is not empty %}
                     <ul>
                         {% for token in user_tokens | sort %}
-                            <li>
-                                <a href="/view_token/{{ token.getId }}">{{ token.getBarName }}</a>
-                            </li>
+                            <p>
+                                <a href="/view_token/{{ token.getId }}"><button class='btn btn-warning btn-m'>{{ token.getBarName }}</button></a>
+                            </p></br>
                         {% endfor %}
                     </ul>
                     {% else %}
