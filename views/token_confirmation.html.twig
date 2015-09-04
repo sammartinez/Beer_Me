@@ -56,15 +56,14 @@
             <div class="container">
                 <div class="intro-text">
                     <div class="row">
+                        <div class="intro-lead-in"><br>Cheers!</div>
+                        <a href='/select_bar/{{ user.getId }}/{{ friend.getId }}'>Send {{friend.getName}} another beer</a></br>
+                        <a href="/confirmation/{{ user.getId }}">Go Back</a>
                     </div>
                 </div>
             </div>
         </header>
         <div class="container">
-
-        <h1>Nice! You sent a beer!</h1>
-        <a href='/select_bar/{{ user.getId }}/{{ friend.getId }}'>Send another beer</a></br>
-        <a href="/confirmation/{{ user.getId }}">Back to Page</a>
         </div>
     </body>
 </html>
