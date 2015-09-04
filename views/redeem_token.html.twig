@@ -20,23 +20,20 @@
             <div class="container">
                 <div class="intro-text">
                     <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">{{ token.getPatronName }}'s Token</h2>
+                            <p>This token is good for one {{ item.getDescription }} worth ${{ item.getCost }}.</p>
+
+                            <form action='/redeem_token/{{ token.getId }}'>
+                                <input name='_method' type='hidden' value='delete'>
+                                <button type="submit" class="btn btn-primary">Redeem Token</button>
+                            </form>
+                    </div>
+                        <a href='/show_bar_tokens/{{bar.getId}}'>Go Back</a>
                     </div>
                 </div>
             </div>
         </header>
-
-        <div class="container">
-
-        <h1>{{ token.getPatronName }}'s Token</h1>
-
-        <p>This token is good for one {{ item.getDescription }} worth ${{ item.getCost }}.</p>
-
-        <form action='/redeem_token/{{ token.getId }}'>
-            <input name='_method' type='hidden' value='delete'>
-            <button type='submit'>Redeem Token</button>
-        </form>
-
-        <a href='/show_bar_tokens/{{bar.getId}}'>Home</a>
     </div>
 
 
