@@ -6,7 +6,7 @@
 
 ## Description
 
-_{Beer Me offers the ability to remotely buy a friend a beer for their birthday, when they're down on their luck, or reward one of your software developers working afar. After siging up, a free and quick process, you can sign in using your email address. From your profile page you can buy a drink for a friend (don't worry we will notify them via email), check on the number of drink tokens you have (as well as their value), edit or change your profile information, and add your favorite bars. 
+_{Beer Me offers the ability to remotely buy a friend a drink. After siging up, a free and quick process, you can sign in using your email address. From your profile page you can buy a drink for a friend (don't worry we will notify them via email), check on the number of drink tokens you have (as well as their value), edit or change your profile information, and add your favorite bars. 
 
   Do you want to be a participating bar? No problem! After siging up, you can login to view a profile suited to your needs. We offer the ability to add menu items of your choice to be redeemed with tokens. When you are ready to redeem a customer's token simply click on the "Unredeemed Tokens" link in your profile; from the new page you will see the value of the token as well as an option to the redeem the token. Your profile also has a link to update your business information at your convience.}_
 
