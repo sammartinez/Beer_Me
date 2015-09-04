@@ -61,11 +61,12 @@
             </div>
         </header>
         <div class="container">
-
-        <h1>Here is the token for {{ token.getBarName }}</h1>
-        <p>This token is good for one {{ item.getDescription }} worth ${{ item.getCost }}.</p>
-    </br>
-        <a href='/show_user_tokens/{{ token.getPatronId }}'>Back to Patron</a>
+            <div class='border-solid'>
+                <h1>Here is the token for {{ token.getBarName }}</h1>
+                <h3>This token is good for one {{ item.getDescription }} worth ${{ item.getCost }}.</h3>
+                </br>
+                <a href='/show_user_tokens/{{ token.getPatronId }}'>Back to Patron</a>
+            </div>
         </div>
     </body>
 </html>

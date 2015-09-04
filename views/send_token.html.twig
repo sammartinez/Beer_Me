@@ -64,8 +64,8 @@
             <div id="name">
 
 
-
-        <h1>Send {{ friend.getName }} a beer!</h1>
+        <div class='border-solid'>
+        <h2 class='section-heading'>Send {{ friend.getName }} a beer!</h2>
 
         <form action='/select_bar/{{ user.getId }}/{{ friend.getId }}' method='post'>
             <label for='select_bar'>{{ friend.getName }}'s favorite bars:</label>
@@ -78,7 +78,7 @@
                     {% endif %}
                 {% endfor %}
             </select>
-            <button type='submit'>Select bar</button>
+            <button type='submit' class='btn btn-warning btn-xs'>Select bar</button>
         </form>
 
         {% if selected_bar is not empty %}
@@ -89,8 +89,9 @@
                         <option value = '{{ item.getId }}'>{{ item.getDescription }} - {{ item.getCost }}</option>
                     {% endfor%}
                 </select>
-                <button type='submit'>Send beer token</button>
+                <button type='submit' class='btn btn-warning btn-xs'>Send beer token</button>
             </form>
+        </div>
         {% endif %}
 
 {#      Shopping cart for multiple tokens before purchase.  Non-functional
