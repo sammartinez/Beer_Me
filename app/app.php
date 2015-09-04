@@ -557,7 +557,7 @@
         'all_bars' => $all_bars,
         'preferred_bars' => false,
         'send_token' => false,
-        'token_form' => false,
+        'token_form' => true,
         'edit_user' => false
     ));
     });
