@@ -26,7 +26,7 @@ If you're looking to test this app yourself (these directions assume you are wor
 
 6. Open your browser to ```localhost:8888/phpmyadmin```
 
-7. Import the the database files to the top level of your project folder using phpMyadmin. Do this by clicking the import tab in phpMyadmin and choosing one of the files and clicking "GO". Repeat this step for the other file
+7. Import the the database files to the top level of your project folder using phpMyadmin. Do this by clicking the import tab in phpMyadmin and choosing one of the files and clicking "GO".
 
 8. Start another terminal tab. Open a php server ```php -S localhost:8000```. This is so you can view your twig sites.
 
