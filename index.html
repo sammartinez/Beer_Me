@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Beer me by sammartinez</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Beer me</h1>
+        <p></p>
+
+        <p class="view"><a href="https://github.com/sammartinez/Beer_Me">View the Project on GitHub <small>sammartinez/Beer_Me</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/sammartinez/Beer_Me/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/sammartinez/Beer_Me/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/sammartinez/Beer_Me">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="beer_me" class="anchor" href="#beer_me" aria-hidden="true"><span class="octicon octicon-link"></span></a>Beer_Me</h1>
+
+<h5>
+<a id="its-about-time-you-buy-your-friend-a-beer-september-3rd-2015" class="anchor" href="#its-about-time-you-buy-your-friend-a-beer-september-3rd-2015" aria-hidden="true"><span class="octicon octicon-link"></span></a>It's about time you buy your friend a beer, September 3rd, 2015</h5>
+
+<h4>
+<a id="by-kelli-sommerdyke-casey-heitz-jason-bethel-kyle-pratuch-jordan-johansen-and-sam-martinez" class="anchor" href="#by-kelli-sommerdyke-casey-heitz-jason-bethel-kyle-pratuch-jordan-johansen-and-sam-martinez" aria-hidden="true"><span class="octicon octicon-link"></span></a>By <em><strong>Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez</strong></em>
+</h4>
+
+<h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h2>
+
+<p>Beer Me offers the ability to remotely buy a friend a drink. After siging up, a free and quick process, you can sign in using your email address. From your profile page you can buy a drink for a friend (don't worry we will notify them via email), check on the number of drink tokens you have (as well as their value), edit or change your profile information, and add your favorite bars.</p>
+
+<p>Do you want to be a participating bar? No problem! After siging up, you can login to view a profile suited to your needs. We offer the ability to add menu items of your choice to be redeemed with tokens. When you are ready to redeem a customer's token simply click on the "Unredeemed Tokens" link in your profile; from the new page you will see the value of the token as well as an option to the redeem the token. Your profile also has a link to update your business information at your convenience.</p>
+
+<h2>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h2>
+
+<p>If you're looking to test this app yourself (these directions assume you are working from a mac):</p>
+
+<ol>
+<li><p>Clone repository from GitHub.</p></li>
+<li><p>Run <code>composer install</code> in top level of project folder.</p></li>
+<li><p>in a new terminal tab. enter <code>mysql.server start</code>.</p></li>
+<li><p>Then enter <code>mysql -uroot -proot</code> (you now have MySql running)</p></li>
+<li><p>Start an apache server (another new tab in terminal) with <code>apachectl start</code></p></li>
+<li><p>Open your browser to <code>localhost:8888/phpmyadmin</code></p></li>
+<li><p>Import the the database files to the top level of your project folder using phpMyadmin. Do this by clicking the import tab in phpMyadmin and choosing one of the files and clicking "GO".</p></li>
+<li><p>Start another terminal tab. Open a php server <code>php -S localhost:8000</code>. This is so you can view your twig sites.</p></li>
+<li><p>Direct your browser to <code>localhost:8000</code> .</p></li>
+<li><p>It's about time time you buy your friend a damn beer.</p></li>
+</ol>
+
+<h2>
+<a id="technologies-used" class="anchor" href="#technologies-used" aria-hidden="true"><span class="octicon octicon-link"></span></a>Technologies Used</h2>
+
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>PHP</li>
+<li>PHPUnit</li>
+<li>JavaScript</li>
+<li>JQuery</li>
+<li>Silex</li>
+<li>Twig</li>
+</ul>
+
+<h3>
+<a id="legal" class="anchor" href="#legal" aria-hidden="true"><span class="octicon octicon-link"></span></a>Legal</h3>
+
+<p>Copyright (c) 2015 <strong><em>Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez</em></strong></p>
+
+<p>This software is licensed under the MIT license.</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/sammartinez">sammartinez</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
