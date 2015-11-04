@@ -32,7 +32,7 @@
 <a id="beer_me" class="anchor" href="#beer_me" aria-hidden="true"><span class="octicon octicon-link"></span></a>Beer_Me</h1>
 
 <h5>
-<a id="its-about-time-you-buy-your-friend-a-beer-september-3rd-2015" class="anchor" href="#its-about-time-you-buy-your-friend-a-beer-september-3rd-2015" aria-hidden="true"><span class="octicon octicon-link"></span></a>It's about time you buy your friend a beer, September 3rd, 2015</h5>
+<a id="its-about-time-you-buy-your-friend-a-beer-november-3rd-2015" class="anchor" href="#its-about-time-you-buy-your-friend-a-beer-november-3rd-2015" aria-hidden="true"><span class="octicon octicon-link"></span></a>It's about time you buy your friend a beer, November 3rd, 2015</h5>
 
 <h4>
 <a id="by-kelli-sommerdyke-casey-heitz-jason-bethel-kyle-pratuch-jordan-johansen-and-sam-martinez" class="anchor" href="#by-kelli-sommerdyke-casey-heitz-jason-bethel-kyle-pratuch-jordan-johansen-and-sam-martinez" aria-hidden="true"><span class="octicon octicon-link"></span></a>By <em><strong>Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez</strong></em>
@@ -48,14 +48,20 @@
 <h2>
 <a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h2>
 
-<p>If you're looking to test this app yourself (these directions assume you are working from a mac):</p>
+<p>If you're looking to test this app yourself (these directions assume you are working from a mac and are using MAMP):</p>
 
 <ol>
 <li><p>Clone repository from GitHub.</p></li>
 <li><p>Run <code>composer install</code> in top level of project folder.</p></li>
-<li><p>in a new terminal tab. enter <code>mysql.server start</code>.</p></li>
+<li><p>In a new terminal tab, enter <code>mysql.server start</code>.</p></li>
 <li><p>Then enter <code>mysql -uroot -proot</code> (you now have MySql running)</p></li>
 <li><p>Start an apache server (another new tab in terminal) with <code>apachectl start</code></p></li>
+</ol>
+
+<p>5a. I also recommend using MAMP for mac, when opening MAMP, click on <code>"Preferences &gt; Web Server &gt; Document Root &gt; Beer_Me &gt; web"</code>.
+    The above commands are mainly pointing the server to the web folder on the project folder of Beer Me.</p>
+
+<ol>
 <li><p>Open your browser to <code>localhost:8888/phpmyadmin</code></p></li>
 <li><p>Import the the database files to the top level of your project folder using phpMyadmin. Do this by clicking the import tab in phpMyadmin and choosing one of the files and clicking "GO".</p></li>
 <li><p>Start another terminal tab. Open a php server <code>php -S localhost:8000</code>. This is so you can view your twig sites.</p></li>
@@ -64,7 +70,35 @@
 </ol>
 
 <h2>
+<a id="tutorial-on-using-beer-me" class="anchor" href="#tutorial-on-using-beer-me" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tutorial on using Beer Me</h2>
+
+<ul>
+<li><p>Below, I have created a Tutorial on setting up a couple users in Beer Me and being able to send tokens back and forth to one another. I have not taken the time to create a Tutorial for the business sign up. Stay tune for that.</p></li>
+</ul>
+
+<ol>
+<li>Once you are setup with the application, go ahead and click on Sign Up.</li>
+<li>Enter in your Name and email address and then click on Sign Up.</li>
+<li>A new page should render thanking you for signing up and then you have the ability to sign in.</li>
+<li>After clicking on Sign In from the rendered page, fill in your email address and click on Sign In.</li>
+<li>Once you sign in, you have a few options available to you. Buy a Beer, View your Tokens, Edit your Profile, and choose from your favorite bars.</li>
+<li>I've gone ahead and have added a few test bars into the database for you, they are as followed : <code>Apex, Side Street, Binks, Target, and Test Bar</code>.</li>
+<li>Once you select a test bar, go ahead and add one of these bars to your favorite bars list.</li>
+<li>At this point, we want to see tokens come into play with the application, to do this, repeat the steps from 1-7 and create a second user.</li>
+<li>Once a second user is created, go ahead and type the original email you created when you first started the Tutorial into Buy A Beer dropdown field.</li>
+<li>After searching for the original email, it'll render to a new page that has the user's favorite bars. Select from the dropdown a bar and click on "Select bar".</li>
+<li>At this point, another dropdown will come up below that with different options to choose from that that specific bar offers. Select from the list and click on "Send Beer token".</li>
+<li>If the beer token is sent successfully, then it will render a page that shows two options, either to go back and send another beer to the user or go back to the current user's login window.</li>
+<li>At this point, you're able to click on the sign in in the navigation and sign in with the email address whom you just sent a beer token to.</li>
+<li>Once in that user, click on My Tokens.</li>
+<li>
+<p>Select the token and view what the token is worth!
+And that is a Tutorial walking through using the user side of this app!</p>
+
+<h2>
 <a id="technologies-used" class="anchor" href="#technologies-used" aria-hidden="true"><span class="octicon octicon-link"></span></a>Technologies Used</h2>
+</li>
+</ol>
 
 <ul>
 <li>HTML</li>
@@ -83,24 +117,6 @@
 <p>Copyright (c) 2015 <strong><em>Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez</em></strong></p>
 
 <p>This software is licensed under the MIT license.</p>
-
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-
-<p>The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.</p>
-
-<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/sammartinez">sammartinez</a></p>
