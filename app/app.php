@@ -11,7 +11,7 @@
     $app = New Silex\Application();
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=beer';
+    $server = 'mysql:host=localhost:8889;dbname=beer';
     $username = 'root';
     $password = 'root';
 
