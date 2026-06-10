@@ -1,0 +1,93 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<header class="patron-header">
+    <div class="container">
+        <div class="intro-text">
+            <div class="row"></div>
+        </div>
+    </div>
+</header>
+
+<section class="layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Howdy, {{ user.name }}.</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-solid">
+        <a href="/show_email_search/{{ user.id }}"><h1>Buy a beer</h1></a>
+        {% if view == "send" %}
+            <h2>Find a friend:</h2>
+            <form action="/find_friend/{{ user.id }}" method="get">
+                <label for="search_email">Your friend's email</label>
+                <input id="search_email" name="search_email" type="email" placeholder="buddy@email.com" required>
+                <button type="submit" class="btn btn-default btn-xs">Search</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <div class="border-solid">
+        <a href="/show_user_tokens/{{ user.id }}"><h1>My tokens</h1></a>
+        {% if view == "tokens" %}
+            {% if tokens.length %}
+            <ul>
+                {% for token in tokens %}
+                <p>
+                    <a href="/view_token/{{ token.id }}"><button class="btn btn-warning btn-m">{{ token.menu.bar.name }}</button></a>
+                </p><br>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>You don't have any tokens yet! Apparently, you don't have any cool friends either.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="border-solid">
+        <a href="/show_user_edit/{{ user.id }}"><h1>Edit Profile</h1></a>
+        {% if view == "edit" %}
+            <form action="/edit_user/{{ user.id }}" method="post">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" value="{{ user.name }}" required>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" value="{{ user.email }}" required>
+                <button type="submit" class="btn btn-default btn-xs">Update</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <div class="border-solid">
+        <a href="/show_preferred_bars/{{ user.id }}"><h1>Your favorite bars</h1></a>
+        {% if view == "bars" %}
+            <h4>Here are your preferred bars:</h4>
+            <ul>
+                {% for bar in preferredBars %}
+                    <li>{{ bar.name }}</li>
+                {% endfor %}
+            </ul>
+            <form action="/add_preferred_bar/{{ user.id }}" method="post">
+                <label for="add_bar">Participating bars</label>
+                <select id="add_bar" name="add_bar">
+                    {% for bar in allBars %}
+                        <option value="{{ bar.id }}">{{ bar.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-default btn-xs">Add bar</button>
+            </form>
+            <form action="/delete_preferred_bar/{{ user.id }}" method="post">
+                <label>Delete a bar</label>
+                <select name="bar">
+                    {% for bar in preferredBars %}
+                        <option value="{{ bar.id }}">{{ bar.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-danger btn-xs">Delete preferred bar</button>
+            </form>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,84 @@
+// Schema ported from the original beer.sql (see legacy-beer.sql in this
+// directory). Differences from the legacy schema: real foreign keys with
+// cascading deletes, a unique constraint on patron email (login is by email),
+// and Int ids instead of BigInt.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Patron {
+  id            Int         @id @default(autoincrement())
+  name          String      @db.VarChar(50)
+  email         String      @unique @db.VarChar(50)
+  preferredBars PreferBar[]
+  tokens        Token[]     @relation("ReceivedTokens")
+  sentTokens    Token[]     @relation("SentTokens")
+
+  @@map("patrons")
+}
+
+model Bar {
+  id          Int         @id @default(autoincrement())
+  name        String      @db.VarChar(50)
+  phone       String      @db.VarChar(25)
+  address     String      @db.VarChar(50)
+  website     String      @db.VarChar(50)
+  menus       Menu[]
+  preferredBy PreferBar[]
+
+  @@map("bars")
+}
+
+model Item {
+  id          Int     @id @default(autoincrement())
+  description String  @db.VarChar(50)
+  cost        Decimal @db.Decimal(8, 2)
+  menus       Menu[]
+
+  @@map("items")
+}
+
+/// Join table: which items a bar serves. Tokens point at a menu row,
+/// which is what ties a token to both a bar and an item.
+model Menu {
+  id     Int     @id @default(autoincrement())
+  bar    Bar     @relation(fields: [barId], references: [id], onDelete: Cascade)
+  barId  Int     @map("bar_id")
+  item   Item    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  itemId Int     @map("item_id")
+  tokens Token[]
+
+  @@unique([barId, itemId])
+  @@map("menus")
+}
+
+/// Join table: a patron's favorite bars.
+model PreferBar {
+  id       Int    @id @default(autoincrement())
+  patron   Patron @relation(fields: [patronId], references: [id], onDelete: Cascade)
+  patronId Int    @map("patron_id")
+  bar      Bar    @relation(fields: [barId], references: [id], onDelete: Cascade)
+  barId    Int    @map("bar_id")
+
+  @@unique([patronId, barId])
+  @@map("preferbars")
+}
+
+/// A drink bought for a patron: sender bought patron the item on this menu row.
+model Token {
+  id       Int     @id @default(autoincrement())
+  patron   Patron  @relation("ReceivedTokens", fields: [patronId], references: [id], onDelete: Cascade)
+  patronId Int     @map("patron_id")
+  menu     Menu    @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  menuId   Int     @map("menu_id")
+  sender   Patron? @relation("SentTokens", fields: [senderId], references: [id])
+  senderId Int?    @map("sender_id")
+
+  @@map("tokens")
+}

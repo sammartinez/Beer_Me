@@ -1,0 +1,79 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<!-- Header -->
+<header class="bar-header">
+    <div class="container">
+        <div class="intro-text">
+            <div class="row"></div>
+        </div>
+    </div>
+</header>
+
+<section class="layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <a href="/login?username={{ bar.name | urlencode }}"><h2 class="section-heading">{{ bar.name }}</h2></a>
+            </div>
+        </div>
+
+        <div class="border-solid">
+            <a href="/show_bar_tokens/{{ bar.id }}"><h1>Unredeemed Tokens</h1></a>
+            {% if view == "tokens" %}
+                {% for token in tokens %}
+                <ul>
+                    <a href="/token/{{ token.id }}"><li>{{ token.patron.name }}</li></a>
+                </ul>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="border-solid">
+            <a href="/show_menu_items/{{ bar.id }}"><h1>Menu Items</h1></a>
+            {% if view == "menu" %}
+                {% for item in items %}
+                <ul>
+                    <li>
+                        <form action="/edit_item/{{ bar.id }}/{{ item.id }}" method="post">
+                            <label for="description">Item</label>
+                            <input id="description" name="description" value="{{ item.description }}" required>
+                            <label for="cost">Cost $</label>
+                            <input id="cost" name="cost" value="{{ item.cost }}">
+                            <button type="submit" class="page-scroll btn btn-xl">Update</button>
+                        </form>
+                        <form action="/delete_item/{{ bar.id }}/{{ item.id }}" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </li>
+                </ul>
+                {% endfor %}
+                <form action="/add_item/{{ bar.id }}" method="post">
+                    <label for="description">Item</label>
+                    <input id="description" name="description" type="text" required>
+                    <label for="cost">Cost $</label>
+                    <input id="cost" name="cost" required>
+                    <button type="submit">Add Item</button>
+                </form>
+            {% endif %}
+        </div>
+
+        <div class="border-solid">
+            <a href="/show_bar_edit/{{ bar.id }}"><h1>Edit Profile</h1></a>
+            {% if view == "edit" %}
+                <form action="/edit_bar/{{ bar.id }}" method="post">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" value="{{ bar.name }}" required>
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="text" value="{{ bar.phone }}" required>
+                    <label for="address">Address</label>
+                    <input id="address" name="address" type="text" value="{{ bar.address }}" required>
+                    <label for="website">Website</label>
+                    <input id="website" name="website" type="text" value="{{ bar.website }}" required>
+                    <button type="submit">Update</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

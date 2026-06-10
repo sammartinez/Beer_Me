@@ -1,0 +1,23 @@
+{% extends "base.njk" %}
+
+{% block nav %}{% endblock %}
+
+{% block content %}
+<header class="bar-header">
+    <div class="container">
+        <div class="intro-text">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">{{ token.patron.name }}'s Token</h2>
+                    <p>This token is good for one {{ item.description }} worth ${{ item.cost }}.</p>
+
+                    <form action="/redeem_token/{{ token.id }}" method="post">
+                        <button type="submit" class="btn btn-primary">Redeem Token</button>
+                    </form>
+                </div>
+                <a href="/show_bar_tokens/{{ bar.id }}">Go Back</a>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}

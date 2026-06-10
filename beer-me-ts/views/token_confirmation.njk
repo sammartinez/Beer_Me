@@ -1,0 +1,15 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<header class="bar-header">
+    <div class="container">
+        <div class="intro-text">
+            <div class="row">
+                <div class="intro-lead-in"><br>Cheers!</div>
+                <a href="/select_bar/{{ user.id }}/{{ friend.id }}">Send {{ friend.name }} another beer</a><br>
+                <a href="/confirmation/{{ user.id }}">Go Back</a>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
